@@ -2,18 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon --exec ts-node index.ts",
-    "ts.check": "tsc --project tsconfig.json",
-    "build": "tsc && node copy-dir.js",
-    "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "author": "",
   "license": "ISC",
   "description": "",
