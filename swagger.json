@@ -49,20 +49,53 @@
               "application/json": {
                 "example": {
                   "message": "Get all vehicles successfully",
-                  "data": [
-                    {
-                      "_id": "64a1b2c3d4e5f67890abcdef",
-                      "tenXe": "Toyota Camry",
-                      "gia": 25000,
-                      "soLuong": 10
-                    },
-                    {
-                      "_id": "64a1b2c3d4e5f67890abcdee",
-                      "tenXe": "Honda Accord",
-                      "gia": 22000,
-                      "soLuong": 15
-                    }
-                  ]
+                  "data": {
+                    "message": "Get all vehicles successfully",
+                    "data": [
+                      {
+                        "_id": "6a1bf84ddbf514b83433283d",
+                        "soKhung": "SK001",
+                        "soMay": "SM001",
+                        "dongXeId": {
+                          "_id": "6a1bf84ddbf514b83433283b",
+                          "tenHang": "Toyota",
+                          "tenDongXe": "Camry",
+                          "namSanXuat": 2024,
+                          "giaNiemYet": 1200000000,
+                          "moTa": "Sedan cao cấp",
+                          "createdAt": "2026-05-31T08:58:53.017Z",
+                          "updatedAt": "2026-05-31T08:58:53.017Z",
+                          "__v": 0
+                        },
+                        "mauSac": "Đen",
+                        "trangThaiXe": "Còn hàng",
+                        "__v": 0,
+                        "createdAt": "2026-05-31T08:58:53.080Z",
+                        "updatedAt": "2026-05-31T08:58:53.080Z"
+                      },
+                      {
+                        "_id": "6a1bf84ddbf514b83433283e",
+                        "soKhung": "SK002",
+                        "soMay": "SM002",
+                        "dongXeId": {
+                          "_id": "6a1bf84ddbf514b83433283b",
+                          "tenHang": "Toyota",
+                          "tenDongXe": "Camry",
+                          "namSanXuat": 2024,
+                          "giaNiemYet": 1200000000,
+                          "moTa": "Sedan cao cấp",
+                          "createdAt": "2026-05-31T08:58:53.017Z",
+                          "updatedAt": "2026-05-31T08:58:53.017Z",
+                          "__v": 0
+                        },
+                        "mauSac": "Trắng",
+                        "trangThaiXe": "Còn hàng",
+                        "__v": 0,
+                        "createdAt": "2026-05-31T08:58:53.080Z",
+                        "updatedAt": "2026-05-31T08:58:53.080Z"
+                      }
+                    ]
+                  }
                 }
               }
             }
@@ -83,13 +116,44 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": "6a1bf84ddbf514b83433283d"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": {}
+            "description": "Get vehicle detail successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": {
+                    "message": "Get vehicle detail successfully",
+                    "data": {
+                      "_id": "6a1bf84ddbf514b83433283d",
+                      "soKhung": "SK001",
+                      "soMay": "SM001",
+                      "dongXeId": {
+                        "_id": "6a1bf84ddbf514b83433283b",
+                        "tenHang": "Toyota",
+                        "tenDongXe": "Camry",
+                        "namSanXuat": 2024,
+                        "giaNiemYet": 1200000000,
+                        "moTa": "Sedan cao cấp",
+                        "createdAt": "2026-05-31T08:58:53.017Z",
+                        "updatedAt": "2026-05-31T08:58:53.017Z",
+                        "__v": 0
+                      },
+                      "mauSac": "Đen",
+                      "trangThaiXe": "Còn hàng",
+                      "__v": 0,
+                      "createdAt": "2026-05-31T08:58:53.080Z",
+                      "updatedAt": "2026-05-31T08:58:53.080Z"
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
             "description": "Vehicle not found"
@@ -155,7 +219,7 @@
         }
       }
     },
-    "/sign-in": {
+    "/auth/sign-in": {
       "post": {
         "tags": ["Auth"],
         "summary": "Đăng nhập người dùng",
@@ -168,11 +232,11 @@
                 "properties": {
                   "username": {
                     "type": "string",
-                    "example": "buoithanhminh"
+                    "example": "kh001"
                   },
                   "password": {
                     "type": "string",
-                    "example": "minhbuoi123"
+                    "example": "123456"
                   }
                 },
                 "required": ["username", "password"]
@@ -182,7 +246,23 @@
         },
         "responses": {
           "200": {
-            "description": {}
+            "description": "Dang nhap thanh cong!",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Sign-in successful",
+                  "user": {
+                    "id": "6a1bf84cdbf514b834332839",
+                    "fullName": "Lê Văn A",
+                    "email": "a@gmail.com",
+                    "phoneNumber": "0911111111",
+                    "address": "HCM",
+                    "cccd": "012345678901",
+                    "status": true
+                  }
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -193,7 +273,7 @@
         }
       }
     },
-    "/sign-up": {
+    "/auth/sign-up": {
       "post": {
         "tags": ["Auth"],
         "summary": "Đăng ký người dùng",

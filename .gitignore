@@ -3,3 +3,7 @@
 
 # misc
 .env
+
+# seed
+seed.ts
+dist/seed.js

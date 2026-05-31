@@ -13,7 +13,7 @@ export const signIn = async (req: Request, res: Response) => {
   }
 
   try {
-    const user = await KhachHang.findOne({ username });
+    const user = await KhachHang.findOne({ tenDangNhap: username });
 
     if (!user) {
       return res.status(401).json({ message: "Invalid username or password" });
@@ -49,7 +49,7 @@ export const signIn = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    console.error("Error when get SIGN-IN detail! " + error);
+    console.error("Error when get SIGN-IN! " + error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -110,18 +110,17 @@ export const signUp = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    console.error("Error when get SIGN-UP detail! " + error);
+    console.error("Error when get SIGN-UP! " + error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 export const signOut = async (req: Request, res: Response) => {
   try {
-    // Perform any necessary cleanup for the user's session
     res.clearCookie("token");
     return res.status(200).json({ message: "Sign-out successful" });
   } catch (error) {
-    console.error("Error when get SIGN-OUT detail! " + error);
+    console.error("Error when get SIGN-OUT! " + error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

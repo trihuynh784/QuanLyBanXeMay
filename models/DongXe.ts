@@ -28,4 +28,5 @@ const DongXeSchema = new mongoose.Schema(
 );
 
 const DongXe = mongoose.model("DongXe", DongXeSchema, "DongXe");
+
 export default DongXe;

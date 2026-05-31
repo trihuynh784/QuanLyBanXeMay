@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Xe from "../models/Xe";
+import "../models/DongXe";
 
 export const index = async (req: Request, res: Response) => {
   try {

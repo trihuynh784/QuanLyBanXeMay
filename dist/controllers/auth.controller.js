@@ -24,7 +24,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             .json({ message: "Username and password are required" });
     }
     try {
-        const user = yield KhachHang_1.default.findOne({ username });
+        const user = yield KhachHang_1.default.findOne({ tenDangNhap: username });
         if (!user) {
             return res.status(401).json({ message: "Invalid username or password" });
         }
@@ -55,7 +55,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.error("Error when get SIGN-IN detail! " + error);
+        console.error("Error when get SIGN-IN! " + error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
@@ -109,7 +109,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.error("Error when get SIGN-UP detail! " + error);
+        console.error("Error when get SIGN-UP! " + error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
@@ -120,7 +120,7 @@ const signOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return res.status(200).json({ message: "Sign-out successful" });
     }
     catch (error) {
-        console.error("Error when get SIGN-OUT detail! " + error);
+        console.error("Error when get SIGN-OUT! " + error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
