@@ -5,8 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const DongXeSchema = new mongoose_1.default.Schema({
-    tenHang: {
-        type: String,
+    loaiXeId: {
+        type: mongoose_1.default.Schema.Types.ObjectId,
+        ref: "LoaiXe",
         required: true,
     },
     tenDongXe: {
@@ -21,9 +22,14 @@ const DongXeSchema = new mongoose_1.default.Schema({
         type: Number,
         required: true,
     },
-    moTa: {
-        type: String,
+    dungTichXiLanh: {
+        type: Number,
+        required: true,
     },
+    mucTieuThuNhienLieu: {
+        type: Number,
+    },
+    moTa: String,
 }, {
     timestamps: true,
 });

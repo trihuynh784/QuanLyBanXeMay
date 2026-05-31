@@ -1,13 +1,17 @@
 import { Request, Response } from "express";
 import Xe from "../models/Xe";
 import "../models/DongXe";
+import "../models/LoaiXe"
 
 export const index = async (req: Request, res: Response) => {
   try {
     const objectFind = {};
 
     const vehicles =
-      (await Xe.find(objectFind).populate({path: "dongXeId"})) ?? [];
+      (await Xe.find(objectFind).populate({
+        path: "dongXeId",
+        populate: { path: "loaiXeId" },
+      })) ?? [];
 
     return res.status(200).json({
       message: "Get all vehicles successfully",
@@ -23,7 +27,7 @@ export const vehicleDetail = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 
-    const vehicle = await Xe.findById(id).populate({path: "dongXeId"});
+    const vehicle = await Xe.findById(id).populate({ path: "dongXeId" });
 
     if (!vehicle) {
       return res.status(404).json({ message: "Vehicle not found" });

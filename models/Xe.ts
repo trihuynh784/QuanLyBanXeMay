@@ -5,24 +5,35 @@ const XeSchema = new mongoose.Schema(
     soKhung: {
       type: String,
       required: true,
-      unique: true, // Vì là PK trong cơ sở dữ liệu gốc
+      unique: true,
     },
+
     soMay: {
       type: String,
       required: true,
+      unique: true,
     },
+
     dongXeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DongXe",
       required: true,
     },
+
     mauSac: {
       type: String,
       required: true,
     },
+
+    namSanXuat: {
+      type: Number,
+      required: true,
+    },
+
     trangThaiXe: {
       type: String,
-      required: true,
+      enum: ["ConHang", "DatCoc", "DaBan"],
+      default: "ConHang",
     },
   },
   {

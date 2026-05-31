@@ -15,11 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.vehicleDetail = exports.index = void 0;
 const Xe_1 = __importDefault(require("../models/Xe"));
 require("../models/DongXe");
+require("../models/LoaiXe");
 const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
         const objectFind = {};
-        const vehicles = (_a = (yield Xe_1.default.find(objectFind).populate({ path: "dongXeId" }))) !== null && _a !== void 0 ? _a : [];
+        const vehicles = (_a = (yield Xe_1.default.find(objectFind).populate({
+            path: "dongXeId",
+            populate: { path: "loaiXeId" },
+        }))) !== null && _a !== void 0 ? _a : [];
         return res.status(200).json({
             message: "Get all vehicles successfully",
             data: vehicles,

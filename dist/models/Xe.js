@@ -13,6 +13,7 @@ const XeSchema = new mongoose_1.default.Schema({
     soMay: {
         type: String,
         required: true,
+        unique: true,
     },
     dongXeId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
@@ -23,9 +24,14 @@ const XeSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    namSanXuat: {
+        type: Number,
+        required: true,
+    },
     trangThaiXe: {
         type: String,
-        required: true,
+        enum: ["ConHang", "DatCoc", "DaBan"],
+        default: "ConHang",
     },
 }, {
     timestamps: true,

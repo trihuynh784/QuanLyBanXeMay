@@ -2,25 +2,37 @@ import mongoose from "mongoose";
 
 const DongXeSchema = new mongoose.Schema(
   {
-    tenHang: {
-      type: String,
+    loaiXeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "LoaiXe",
       required: true,
     },
+
     tenDongXe: {
       type: String,
       required: true,
     },
+
     namSanXuat: {
       type: Number,
       required: true,
     },
+
     giaNiemYet: {
       type: Number,
       required: true,
     },
-    moTa: {
-      type: String,
+
+    dungTichXiLanh: {
+      type: Number,
+      required: true,
     },
+
+    mucTieuThuNhienLieu: {
+      type: Number,
+    },
+
+    moTa: String,
   },
   {
     timestamps: true,
