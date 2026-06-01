@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authMiddleware = void 0;
+exports.authMiddlewareAdmin = exports.authMiddleware = void 0;
 const KhachHang_1 = __importDefault(require("../models/KhachHang"));
+const NhanVien_1 = __importDefault(require("../models/NhanVien"));
 const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const authHeader = (_a = req.headers) === null || _a === void 0 ? void 0 : _a.authorization;
-    const token = authHeader && authHeader.split(" ")[1];
+    var _a, _b, _c;
+    const token = ((_b = (_a = req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(" ")[1]) || ((_c = req.cookies) === null || _c === void 0 ? void 0 : _c.token);
     if (!token) {
         return res.status(401).json({ message: "Token missing" });
     }
@@ -29,3 +29,17 @@ const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     next();
 });
 exports.authMiddleware = authMiddleware;
+const authMiddlewareAdmin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c;
+    const token = ((_b = (_a = req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(" ")[1]) || ((_c = req.cookies) === null || _c === void 0 ? void 0 : _c.token);
+    if (!token) {
+        return res.status(401).json({ message: "Token missing" });
+    }
+    const user = yield NhanVien_1.default.findOne({ token });
+    if (!user) {
+        return res.status(401).json({ message: "Invalid token" });
+    }
+    req["user"] = user;
+    next();
+});
+exports.authMiddlewareAdmin = authMiddlewareAdmin;

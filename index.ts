@@ -4,10 +4,12 @@ import dotenv from "dotenv";
 import clientRoute from "./routes/index.route";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 const port = process.env.PORT || 5000;
 
 connectDB();

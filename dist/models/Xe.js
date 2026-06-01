@@ -33,6 +33,10 @@ const XeSchema = new mongoose_1.default.Schema({
         enum: ["ConHang", "DatCoc", "DaBan"],
         default: "ConHang",
     },
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true,
 });

@@ -33,6 +33,10 @@ const DongXeSchema = new mongoose.Schema(
     },
 
     moTa: String,
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

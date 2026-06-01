@@ -11,6 +11,10 @@ const LoaiXeSchema = new mongoose_1.default.Schema({
         unique: true,
     },
     moTa: String,
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true,
 });

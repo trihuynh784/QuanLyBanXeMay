@@ -8,6 +8,10 @@ const LoaiXeSchema = new mongoose.Schema(
       unique: true,
     },
     moTa: String,
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

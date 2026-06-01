@@ -7,33 +7,32 @@ const XeSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-
     soMay: {
       type: String,
       required: true,
       unique: true,
     },
-
     dongXeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DongXe",
       required: true,
     },
-
     mauSac: {
       type: String,
       required: true,
     },
-
     namSanXuat: {
       type: Number,
       required: true,
     },
-
     trangThaiXe: {
       type: String,
       enum: ["ConHang", "DatCoc", "DaBan"],
       default: "ConHang",
+    },
+    deleted: {
+      type: Boolean,
+      default: false,
     },
   },
   {
