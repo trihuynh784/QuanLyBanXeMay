@@ -9,7 +9,20 @@ export const index = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Get list of vehicle models successfully",
-      data: models,
+      data: models.map((mod: any) => ({
+        _id: mod._id,
+        loaiXe: mod.loaiXeId ? {
+          _id: mod.loaiXeId._id,
+          tenLoaiXe: mod.loaiXeId.tenLoaiXe,
+          moTa: mod.loaiXeId.moTa,
+        } : null,
+        tenDongXe: mod.tenDongXe,
+        namSanXuat: mod.namSanXuat,
+        giaNiemYet: mod.giaNiemYet,
+        dungTichXiLanh: mod.dungTichXiLanh,
+        mucTieuThuNhienLieu: mod.mucTieuThuNhienLieu,
+        moTa: mod.moTa,
+      })),
     });
   } catch (error) {
     console.error("Error when getting vehicle models! " + error);
@@ -61,7 +74,16 @@ export const addModel = async (req: Request, res: Response) => {
 
     return res.status(201).json({
       message: "Add vehicle model successfully",
-      data: newModel,
+      data: {
+        _id: newModel._id,
+        loaiXeId: newModel.loaiXeId,
+        tenDongXe: newModel.tenDongXe,
+        namSanXuat: newModel.namSanXuat,
+        giaNiemYet: newModel.giaNiemYet,
+        dungTichXiLanh: newModel.dungTichXiLanh,
+        mucTieuThuNhienLieu: newModel.mucTieuThuNhienLieu,
+        moTa: newModel.moTa,
+      },
     });
   } catch (error) {
     console.error("Error when adding vehicle model! " + error);
@@ -87,7 +109,16 @@ export const deleteModel = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Delete vehicle model successfully",
-      data: model,
+      data: {
+        _id: model._id,
+        loaiXeId: model.loaiXeId,
+        tenDongXe: model.tenDongXe,
+        namSanXuat: model.namSanXuat,
+        giaNiemYet: model.giaNiemYet,
+        dungTichXiLanh: model.dungTichXiLanh,
+        mucTieuThuNhienLieu: model.mucTieuThuNhienLieu,
+        moTa: model.moTa,
+      },
     });
   } catch (error) {
     console.error("Error when deleting vehicle model! " + error);

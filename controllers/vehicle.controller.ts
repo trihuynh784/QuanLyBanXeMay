@@ -15,7 +15,29 @@ export const index = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Get all vehicles successfully",
-      data: vehicles,
+      data: vehicles.map((v: any) => ({
+        _id: v._id,
+        soKhung: v.soKhung,
+        soMay: v.soMay,
+        hinhAnh: v.hinhAnh,
+        dongXe: v.dongXeId ? {
+          _id: v.dongXeId._id,
+          loaiXe: v.dongXeId.loaiXeId ? {
+            _id: v.dongXeId.loaiXeId._id,
+            tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
+            moTa: v.dongXeId.loaiXeId.moTa,
+          } : null,
+          tenDongXe: v.dongXeId.tenDongXe,
+          namSanXuat: v.dongXeId.namSanXuat,
+          giaNiemYet: v.dongXeId.giaNiemYet,
+          dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+          mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+          moTa: v.dongXeId.moTa,
+        } : null,
+        mauSac: v.mauSac,
+        namSanXuat: v.namSanXuat,
+        trangThaiXe: v.trangThaiXe,
+      })),
     });
   } catch (error) {
     console.error("Error when get list of vehicles! " + error);
@@ -36,9 +58,28 @@ export const vehicleDetail = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Vehicle not found" });
     }
 
+    const v: any = vehicle;
     return res.status(200).json({
       message: "Get vehicle detail successfully",
-      data: vehicle,
+      data: {
+        _id: v._id,
+        soKhung: v.soKhung,
+        soMay: v.soMay,
+        hinhAnh: v.hinhAnh,
+        dongXe: v.dongXeId ? {
+          _id: v.dongXeId._id,
+          loaiXeId: v.dongXeId.loaiXeId,
+          tenDongXe: v.dongXeId.tenDongXe,
+          namSanXuat: v.dongXeId.namSanXuat,
+          giaNiemYet: v.dongXeId.giaNiemYet,
+          dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+          mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+          moTa: v.dongXeId.moTa,
+        } : null,
+        mauSac: v.mauSac,
+        namSanXuat: v.namSanXuat,
+        trangThaiXe: v.trangThaiXe,
+      },
     });
   } catch (error) {
     console.error("Error when get vehicle detail! " + error);
@@ -79,7 +120,16 @@ export const addVehicle = async (req: Request, res: Response) => {
 
     return res.status(201).json({
       message: "Add vehicle successfully",
-      data: newVehicle,
+      data: {
+        _id: newVehicle._id,
+        soKhung: newVehicle.soKhung,
+        soMay: newVehicle.soMay,
+        hinhAnh: newVehicle.hinhAnh,
+        dongXeId: newVehicle.dongXeId,
+        mauSac: newVehicle.mauSac,
+        namSanXuat: newVehicle.namSanXuat,
+        trangThaiXe: newVehicle.trangThaiXe,
+      },
     });
   } catch (error) {
     console.error("Error when adding vehicle! " + error);
@@ -116,7 +166,16 @@ export const updateVehicle = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Update vehicle successfully",
-      data: vehicle,
+      data: {
+        _id: vehicle._id,
+        soKhung: vehicle.soKhung,
+        soMay: vehicle.soMay,
+        hinhAnh: vehicle.hinhAnh,
+        dongXeId: vehicle.dongXeId,
+        mauSac: vehicle.mauSac,
+        namSanXuat: vehicle.namSanXuat,
+        trangThaiXe: vehicle.trangThaiXe,
+      },
     });
   } catch (error) {
     console.error("Error when updating vehicle! " + error);
@@ -140,7 +199,16 @@ export const deleteVehicle = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Delete vehicle successfully",
-      data: vehicle,
+      data: {
+        _id: vehicle._id,
+        soKhung: vehicle.soKhung,
+        soMay: vehicle.soMay,
+        hinhAnh: vehicle.hinhAnh,
+        dongXeId: vehicle.dongXeId,
+        mauSac: vehicle.mauSac,
+        namSanXuat: vehicle.namSanXuat,
+        trangThaiXe: vehicle.trangThaiXe,
+      },
     });
   } catch (error) {
     console.error("Error when deleting vehicle! " + error);

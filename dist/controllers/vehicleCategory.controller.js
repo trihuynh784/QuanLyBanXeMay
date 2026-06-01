@@ -19,7 +19,11 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const categories = yield LoaiXe_1.default.find({ deleted: false });
         return res.status(200).json({
             message: "Get list of vehicle categories successfully",
-            data: categories,
+            data: categories.map((cat) => ({
+                _id: cat._id,
+                tenLoaiXe: cat.tenLoaiXe,
+                moTa: cat.moTa,
+            })),
         });
     }
     catch (error) {
@@ -53,7 +57,11 @@ const addCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         yield newCategory.save();
         return res.status(201).json({
             message: "Add vehicle category successfully",
-            data: newCategory,
+            data: {
+                _id: newCategory._id,
+                tenLoaiXe: newCategory.tenLoaiXe,
+                moTa: newCategory.moTa,
+            },
         });
     }
     catch (error) {
@@ -71,7 +79,11 @@ const deleteCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
         return res.status(200).json({
             message: "Delete vehicle category successfully",
-            data: category,
+            data: {
+                _id: category._id,
+                tenLoaiXe: category.tenLoaiXe,
+                moTa: category.moTa,
+            },
         });
     }
     catch (error) {

@@ -6,6 +6,7 @@ import vehicleCategoryRoute from "./vehicleCategory.route";
 import authRoute from "./auth.route";
 import uploadRoute from "./upload.route";
 import customerRoute from "./customer.route";
+import orderRoute from "./order.route";
 
 const baseURL = "/api";
 
@@ -21,6 +22,8 @@ const clientRoute = (app: Express) => {
   app.use(baseURL + "/auth", authRoute);
 
   app.use(baseURL + "/customers", customerRoute);
+
+  app.use(baseURL + "/orders", orderRoute);
 };
 
 export default clientRoute;

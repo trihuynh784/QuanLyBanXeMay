@@ -17,22 +17,48 @@
   ],
   "tags": [
     {
-      "name": "Đơn hàng",
-      "description": "Order management APIs"
-    },
-    {
       "name": "Xe",
-      "description": "Vehicle management APIs"
+      "description": "APIs quản lý xe"
     },
     {
-      "name": "Auth",
-      "description": "Authentication APIs"
+      "name": "Dòng Xe",
+      "description": "APIs quản lý dòng xe"
+    },
+    {
+      "name": "Loại Xe",
+      "description": "APIs quản lý loại xe"
+    },
+    {
+      "name": "Đơn hàng",
+      "description": "APIs quản lý đơn hàng"
+    },
+    {
+      "name": "Khách hàng",
+      "description": "APIs quản lý khách hàng"
+    },
+    {
+      "name": "Upload",
+      "description": "APIs upload file"
+    },
+    {
+      "name": "Auth User",
+      "description": "APIs xác thực cho khách hàng"
+    },
+    {
+      "name": "Auth Admin",
+      "description": "APIs xác thực cho nhân viên quản trị"
+    },
+    {
+      "name": "Nhân viên",
+      "description": "APIs quản lý nhân viên"
     }
   ],
   "paths": {
     "/vehicles": {
       "get": {
-        "tags": ["Xe"],
+        "tags": [
+          "Xe"
+        ],
         "summary": "Lấy danh sách xe",
         "responses": {
           "200": {
@@ -41,53 +67,74 @@
               "application/json": {
                 "example": {
                   "message": "Get all vehicles successfully",
-                  "data": {
-                    "message": "Get all vehicles successfully",
-                    "data": [
-                      {
-                        "_id": "6a1bf84ddbf514b83433283d",
-                        "soKhung": "SK001",
-                        "soMay": "SM001",
-                        "dongXeId": {
-                          "_id": "6a1bf84ddbf514b83433283b",
-                          "tenHang": "Toyota",
-                          "tenDongXe": "Camry",
-                          "namSanXuat": 2024,
-                          "giaNiemYet": 1200000000,
-                          "moTa": "Sedan cao cấp",
-                          "createdAt": "2026-05-31T08:58:53.017Z",
-                          "updatedAt": "2026-05-31T08:58:53.017Z",
-                          "__v": 0
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa28",
+                      "soKhung": "WIN001",
+                      "soMay": "WM001",
+                      "dongXeId": {
+                        "_id": "6a1c406192cc8d5a1134aa25",
+                        "loaiXeId": {
+                          "_id": "6a1c406192cc8d5a1134aa21",
+                          "tenLoaiXe": "Xe côn tay",
+                          "moTa": "Dòng xe thể thao côn tay"
                         },
-                        "mauSac": "Đen",
-                        "trangThaiXe": "Còn hàng",
-                        "__v": 0,
-                        "createdAt": "2026-05-31T08:58:53.080Z",
-                        "updatedAt": "2026-05-31T08:58:53.080Z"
+                        "tenDongXe": "Winner X",
+                        "namSanXuat": 2012,
+                        "giaNiemYet": 46000000,
+                        "dungTichXiLanh": 150,
+                        "mucTieuThuNhienLieu": 2.1,
+                        "moTa": "Xe côn tay thể thao"
                       },
-                      {
-                        "_id": "6a1bf84ddbf514b83433283e",
-                        "soKhung": "SK002",
-                        "soMay": "SM002",
-                        "dongXeId": {
-                          "_id": "6a1bf84ddbf514b83433283b",
-                          "tenHang": "Toyota",
-                          "tenDongXe": "Camry",
-                          "namSanXuat": 2024,
-                          "giaNiemYet": 1200000000,
-                          "moTa": "Sedan cao cấp",
-                          "createdAt": "2026-05-31T08:58:53.017Z",
-                          "updatedAt": "2026-05-31T08:58:53.017Z",
-                          "__v": 0
+                      "mauSac": "Xanh",
+                      "namSanXuat": 2025,
+                      "trangThaiXe": "ConHang"
+                    },
+                    {
+                      "_id": "6a1d92471b41c9287a20f972",
+                      "soKhung": "SH001",
+                      "soMay": "SM001",
+                      "dongXeId": {
+                        "_id": "6a1d913a33e4a61d35d76019",
+                        "loaiXeId": {
+                          "_id": "6a1c406192cc8d5a1134aa20",
+                          "tenLoaiXe": "Xe tay ga",
+                          "moTa": "Dòng xe tay ga Honda"
                         },
-                        "mauSac": "Trắng",
-                        "trangThaiXe": "Còn hàng",
-                        "__v": 0,
-                        "createdAt": "2026-05-31T08:58:53.080Z",
-                        "updatedAt": "2026-05-31T08:58:53.080Z"
-                      }
-                    ]
-                  }
+                        "tenDongXe": "SH",
+                        "namSanXuat": 1997,
+                        "giaNiemYet": 90000000,
+                        "dungTichXiLanh": 150,
+                        "mucTieuThuNhienLieu": 123231,
+                        "moTa": "khang"
+                      },
+                      "mauSac": "Trắng",
+                      "namSanXuat": 2026,
+                      "trangThaiXe": "ConHang"
+                    },
+                    {
+                      "_id": "6a1d9a6b1b41c9287a20f973",
+                      "soKhung": "AB001",
+                      "soMay": "AM001",
+                      "dongXeId": {
+                        "_id": "6a1c406192cc8d5a1134aa24",
+                        "loaiXeId": {
+                          "_id": "6a1c406192cc8d5a1134aa20",
+                          "tenLoaiXe": "Xe tay ga",
+                          "moTa": "Dòng xe tay ga Honda"
+                        },
+                        "tenDongXe": "Air Blade 160",
+                        "namSanXuat": 2015,
+                        "giaNiemYet": 56000000,
+                        "dungTichXiLanh": 160,
+                        "mucTieuThuNhienLieu": 2.3,
+                        "moTa": "Xe tay ga thể thao"
+                      },
+                      "mauSac": "Trắng",
+                      "namSanXuat": 2026,
+                      "trangThaiXe": "ConHang"
+                    }
+                  ]
                 }
               }
             }
@@ -98,9 +145,11 @@
         }
       }
     },
-    "/vehicles/detail/{id}": {
+    "/vehicles/detail/6a1c406192cc8d5a1134aa27": {
       "get": {
-        "tags": ["Xe"],
+        "tags": [
+          "Xe"
+        ],
         "summary": "Lấy chi tiết xe theo ID",
         "parameters": [
           {
@@ -108,8 +157,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "default": "6a1bf84ddbf514b83433283d"
+              "type": "string"
             }
           }
         ],
@@ -119,29 +167,24 @@
             "content": {
               "application/json": {
                 "example": {
+                  "message": "Get vehicle detail successfully",
                   "data": {
-                    "message": "Get vehicle detail successfully",
-                    "data": {
-                      "_id": "6a1bf84ddbf514b83433283d",
-                      "soKhung": "SK001",
-                      "soMay": "SM001",
-                      "dongXeId": {
-                        "_id": "6a1bf84ddbf514b83433283b",
-                        "tenHang": "Toyota",
-                        "tenDongXe": "Camry",
-                        "namSanXuat": 2024,
-                        "giaNiemYet": 1200000000,
-                        "moTa": "Sedan cao cấp",
-                        "createdAt": "2026-05-31T08:58:53.017Z",
-                        "updatedAt": "2026-05-31T08:58:53.017Z",
-                        "__v": 0
-                      },
-                      "mauSac": "Đen",
-                      "trangThaiXe": "Còn hàng",
-                      "__v": 0,
-                      "createdAt": "2026-05-31T08:58:53.080Z",
-                      "updatedAt": "2026-05-31T08:58:53.080Z"
-                    }
+                    "_id": "6a1d9a6b1b41c9287a20f973",
+                    "soKhung": "AB001",
+                    "soMay": "AM001",
+                    "dongXeId": {
+                      "_id": "6a1c406192cc8d5a1134aa24",
+                      "loaiXeId": "6a1c406192cc8d5a1134aa20",
+                      "tenDongXe": "Air Blade 160",
+                      "namSanXuat": 2015,
+                      "giaNiemYet": 56000000,
+                      "dungTichXiLanh": 160,
+                      "mucTieuThuNhienLieu": 2.3,
+                      "moTa": "Xe tay ga thể thao"
+                    },
+                    "mauSac": "Trắng",
+                    "namSanXuat": 2026,
+                    "trangThaiXe": "ConHang"
                   }
                 }
               }
@@ -158,8 +201,15 @@
     },
     "/vehicles/add": {
       "post": {
-        "tags": ["Vehicles"],
+        "tags": [
+          "Xe"
+        ],
         "summary": "Thêm xe mới vào hệ thống",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -175,30 +225,22 @@
                 ],
                 "properties": {
                   "soKhung": {
-                    "type": "string",
-                    "example": "VIS002"
+                    "type": "string"
                   },
                   "soMay": {
-                    "type": "string",
-                    "example": "VM002"
+                    "type": "string"
                   },
                   "dongXeId": {
-                    "type": "string",
-                    "example": "6a1c406192cc8d5a1134aa23",
-                    "description": "ID của dòng xe (MongoDB ObjectId)"
+                    "type": "string"
                   },
                   "mauSac": {
-                    "type": "string",
-                    "example": "Đen bóng"
+                    "type": "string"
                   },
                   "namSanXuat": {
-                    "type": "integer",
-                    "example": 2026
+                    "type": "integer"
                   },
                   "trangThaiXe": {
-                    "type": "string",
-                    "example": "ConHang",
-                    "default": "ConHang"
+                    "type": "string"
                   }
                 }
               }
@@ -207,10 +249,810 @@
         },
         "responses": {
           "201": {
-            "description": "Add vehicle successfully"
+            "description": "Add vehicle successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Add vehicle successfully",
+                  "data": {
+                    "soKhung": "VIS004",
+                    "soMay": "VM004",
+                    "dongXeId": "6a1c406192cc8d5a1134aa23",
+                    "mauSac": "Trắng ngọc trinh",
+                    "namSanXuat": 2026,
+                    "trangThaiXe": "ConHang",
+                    "_id": "6a1dad814d5fb3adc5e691e2"
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Missing required fields or soKhung/soMay already exists"
+            "description": "Missing required fields or exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicles/update/6a1c406192cc8d5a1134aa27": {
+      "post": {
+        "tags": [
+          "Xe"
+        ],
+        "summary": "Cập nhật thông tin xe",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "default": "6a1c406192cc8d5a1134aa27",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "soKhung": {
+                    "type": "string"
+                  },
+                  "soMay": {
+                    "type": "string"
+                  },
+                  "dongXeId": {
+                    "type": "string"
+                  },
+                  "mauSac": {
+                    "type": "string"
+                  },
+                  "namSanXuat": {
+                    "type": "integer"
+                  },
+                  "trangThaiXe": {
+                    "type": "string"
+                  },
+                  "hinhAnh": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update vehicle successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update vehicle successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa27",
+                    "soKhung": "RLHME1234FV009876",
+                    "soMay": "ME12E-0987654",
+                    "dongXeId": "664b3c9f1a2b3c4d5e6f7a8b",
+                    "mauSac": "Đỏ đen",
+                    "namSanXuat": 2025,
+                    "trangThaiXe": "Còn hàng",
+                    "hinhAnh": "https://res.cloudinary.com/dzbvf0maj/image/upload/v1780324178/yrdfzqocrnpjat4q7gix.png"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields"
+          },
+          "404": {
+            "description": "Vehicle not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicles/delete/6a1c406192cc8d5a1134aa26": {
+      "delete": {
+        "tags": [
+          "Xe"
+        ],
+        "summary": "Xóa xe (Soft delete)",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete vehicle successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Delete vehicle successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa26",
+                    "soKhung": "VIS001",
+                    "soMay": "VM001",
+                    "dongXeId": "6a1c406192cc8d5a1134aa23",
+                    "mauSac": "Đỏ",
+                    "namSanXuat": 2025,
+                    "trangThaiXe": "ConHang"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Vehicle not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-models": {
+      "get": {
+        "tags": [
+          "Dòng Xe"
+        ],
+        "summary": "Lấy danh sách dòng xe",
+        "responses": {
+          "200": {
+            "description": "Get vehicle models successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get vehicle models successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa21",
+                      "loaiXeId": "6a1c406192cc8d5a1134aa1f",
+                      "tenDongXe": "Vision",
+                      "namSanXuat": 2019,
+                      "giaNiemYet": 32000000,
+                      "dungTichXiLanh": 125,
+                      "mucTieuThuNhienLieu": 1.96,
+                      "moTa": "Xe tay ga quốc dân"
+                    },
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa22",
+                      "loaiXeId": "6a1c406192cc8d5a1134aa20",
+                      "tenDongXe": "Air Blade 150",
+                      "namSanXuat": 2018,
+                      "giaNiemYet": 50000000,
+                      "dungTichXiLanh": 150,
+                      "mucTieuThuNhienLieu": 2.1,
+                      "moTa": "Xe tay ga thể thao"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-models/add": {
+      "post": {
+        "tags": [
+          "Dòng Xe"
+        ],
+        "summary": "Thêm dòng xe mới",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenDongXe": {
+                    "type": "string"
+                  },
+                  "loaiXeId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Add model successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Add vehicle model successfully",
+                  "data": {
+                    "loaiXeId": "6a1c406192cc8d5a1134aa11",
+                    "tenDongXe": "Sh 160i Thể Thao 2027",
+                    "namSanXuat": 2026,
+                    "giaNiemYet": 102000000,
+                    "dungTichXiLanh": 156,
+                    "mucTieuThuNhienLieu": 2.24,
+                    "moTa": "Phiên bản phanh ABS, màu xám xi măng cực hot",
+                    "_id": "6a1dae73c0acb1c729aa978e"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-models/delete/6a1c607e5889ed799b159c39": {
+      "delete": {
+        "tags": [
+          "Dòng Xe"
+        ],
+        "summary": "Xóa dòng xe",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete model successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Delete vehicle model successfully",
+                  "data": {
+                    "_id": "6a1c607e5889ed799b159c39",
+                    "loaiXeId": "6a1c406192cc8d5a1134aa20",
+                    "tenDongXe": "Sh 160i Thể Thao 2026",
+                    "namSanXuat": 2026,
+                    "giaNiemYet": 102000000,
+                    "dungTichXiLanh": 156,
+                    "mucTieuThuNhienLieu": 2.24,
+                    "moTa": "Phiên bản phanh ABS, màu xám xi măng cực hot"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-categories": {
+      "get": {
+        "tags": [
+          "Loại Xe"
+        ],
+        "summary": "Lấy danh sách loại xe",
+        "responses": {
+          "200": {
+            "description": "Get vehicle categories successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get list of vehicle categories successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa1f",
+                      "tenLoaiXe": "Xe số",
+                      "moTa": "Dòng xe số Honda"
+                    },
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa20",
+                      "tenLoaiXe": "Xe tay ga",
+                      "moTa": "Dòng xe tay ga Honda"
+                    },
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa21",
+                      "tenLoaiXe": "Xe côn tay",
+                      "moTa": "Dòng xe thể thao côn tay"
+                    },
+                    {
+                      "_id": "6a1c6342814e3b91c0fd1d78",
+                      "tenLoaiXe": "Xe phân khối lớn",
+                      "moTa": "Các dòng xe mô tô thể thao, naked-bike hoặc adventure có dung tích động cơ lớn như CB650R, Rebel 500, Africa Twin"
+                    },
+                    {
+                      "_id": "6a1c6353814e3b91c0fd1d79",
+                      "tenLoaiXe": "Xe máy điện",
+                      "moTa": "Các dòng xe hai bánh chạy hoàn toàn bằng điện năng thân thiện với môi trường của Honda như Honda EM1 e:"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-categories/add": {
+      "post": {
+        "tags": [
+          "Loại Xe"
+        ],
+        "summary": "Thêm loại xe mới",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenLoaiXe": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Add category successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Add vehicle category successfully",
+                  "data": {
+                    "tenLoaiXe": "Xe máy điện abs",
+                    "moTa": "Các dòng xe hai bánh chạy hoàn toàn bằng điện năng thân thiện với môi trường của Honda như Honda EM1 e:",
+                    "_id": "6a1daed660b1f8575872b545"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vehicle-categories/delete/6a1daed660b1f8575872b545": {
+      "delete": {
+        "tags": [
+          "Loại Xe"
+        ],
+        "summary": "Xóa loại xe",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete category successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Delete vehicle category successfully",
+                  "data": {
+                    "_id": "6a1daed660b1f8575872b545",
+                    "tenLoaiXe": "Xe máy điện abs",
+                    "moTa": "Các dòng xe hai bánh chạy hoàn toàn bằng điện năng thân thiện với môi trường của Honda như Honda EM1 e:"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "tags": [
+          "Đơn hàng"
+        ],
+        "summary": "Lấy danh sách tất cả đơn hàng",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all orders successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get all orders successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa2e",
+                      "ngayDat": "2026-05-31T14:06:25.758Z",
+                      "tongTien": 32000000,
+                      "trangThaiDonHang": "DaThanhToan",
+                      "khachHang": {
+                        "_id": "6a1c406192cc8d5a1134aa2d",
+                        "hoTen": "Le Van A",
+                        "cccd": "012345678901",
+                        "soDienThoai": "0988888888",
+                        "email": "levana_new@gmail.com",
+                        "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM"
+                      },
+                      "nhanVien": {
+                        "_id": "6a1c406192cc8d5a1134aa2c",
+                        "hoTen": "Tran Van Sale",
+                        "soDienThoai": "0900000002",
+                        "email": "sale@gmail.com"
+                      },
+                      "chiTiet": {
+                        "_id": "6a1c406192cc8d5a1134aa2f",
+                        "donHangId": "6a1c406192cc8d5a1134aa2e",
+                        "xeId": {
+                          "_id": "6a1c406192cc8d5a1134aa26",
+                          "soKhung": "VIS001",
+                          "soMay": "VM001",
+                          "dongXeId": {
+                            "_id": "6a1c406192cc8d5a1134aa23",
+                            "loaiXeId": {
+                              "_id": "6a1c406192cc8d5a1134aa20",
+                              "tenLoaiXe": "Xe tay ga"
+                            },
+                            "tenDongXe": "Vision"
+                          },
+                          "mauSac": "Đỏ",
+                          "namSanXuat": 2025,
+                          "trangThaiXe": "ConHang",
+                          "hinhAnh": [
+                            ""
+                          ]
+                        },
+                        "giaBan": 32000000
+                      }
+                    },
+                    {
+                      "_id": "6a1dabfc3b15ea891806fb1a",
+                      "ngayDat": "2026-06-01T15:57:48.395Z",
+                      "tongTien": 45000000,
+                      "trangThaiDonHang": "Chờ xử lý",
+                      "khachHang": {
+                        "_id": "6a1d3ec45ee228fea775a741",
+                        "hoTen": "Khang Nguyễn Hoàng",
+                        "cccd": "09992",
+                        "soDienThoai": "0907095132",
+                        "email": "khangchoigioi1@gmail.com",
+                        "diaChi": "Nguyen Van Quy"
+                      },
+                      "nhanVien": {
+                        "_id": "6a1c406192cc8d5a1134aa2b",
+                        "hoTen": "Nguyen Van Admin",
+                        "soDienThoai": "0900000001",
+                        "email": "admin@gmail.com"
+                      },
+                      "chiTiet": {
+                        "_id": "6a1dabfc3b15ea891806fb1b",
+                        "donHangId": "6a1dabfc3b15ea891806fb1a",
+                        "xeId": {
+                          "_id": "6a1d92471b41c9287a20f972",
+                          "soKhung": "SH001",
+                          "soMay": "SM001",
+                          "dongXeId": {
+                            "_id": "6a1d913a33e4a61d35d76019",
+                            "loaiXeId": {
+                              "_id": "6a1c406192cc8d5a1134aa20",
+                              "tenLoaiXe": "Xe tay ga"
+                            },
+                            "tenDongXe": "SH"
+                          },
+                          "mauSac": "Trắng",
+                          "namSanXuat": 2026,
+                          "trangThaiXe": "ConHang"
+                        },
+                        "giaBan": 45000000
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/orders/add": {
+      "post": {
+        "tags": [
+          "Đơn hàng"
+        ],
+        "summary": "Tạo đơn hàng mới",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "khachHangId": {
+                    "type": "string"
+                  },
+                  "trangThaiDonHang": {
+                    "type": "string"
+                  },
+                  "chiTiet": {
+                    "type": "object",
+                    "properties": {
+                      "xeId": {
+                        "type": "string"
+                      },
+                      "giaBan": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create order successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Create order successfully",
+                  "data": {
+                    "khachHangId": "6a1d3ec45ee228fea775a741",
+                    "nhanVienId": "6a1c406192cc8d5a1134aa2b",
+                    "tongTien": 45000000,
+                    "trangThaiDonHang": "Chờ xử lý",
+                    "_id": "6a1daf6a60b1f8575872b546",
+                    "ngayDat": "2026-06-01T16:12:26.736Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing fields"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/orders/6a1c406192cc8d5a1134aa2e": {
+      "get": {
+        "tags": [
+          "Đơn hàng"
+        ],
+        "summary": "Lấy chi tiết đơn hàng theo ID",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get order successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get order successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2e",
+                    "khachHangId": {
+                      "_id": "6a1c406192cc8d5a1134aa2d",
+                      "hoTen": "Le Van A",
+                      "cccd": "012345678901",
+                      "soDienThoai": "0988888888",
+                      "email": "levana_new@gmail.com",
+                      "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM"
+                    },
+                    "nhanVienId": {
+                      "_id": "6a1c406192cc8d5a1134aa2c",
+                      "hoTen": "Tran Van Sale",
+                      "soDienThoai": "0900000002",
+                      "email": "sale@gmail.com"
+                    },
+                    "ngayDat": "2026-05-31T14:06:25.758Z",
+                    "tongTien": 32000000,
+                    "trangThaiDonHang": "DaThanhToan",
+                    "chiTiet": [
+                      {
+                        "_id": "6a1c406192cc8d5a1134aa2f",
+                        "donHangId": "6a1c406192cc8d5a1134aa2e",
+                        "xeId": {
+                          "_id": "6a1c406192cc8d5a1134aa26",
+                          "soKhung": "VIS001",
+                          "soMay": "VM001",
+                          "dongXeId": {
+                            "_id": "6a1c406192cc8d5a1134aa23",
+                            "loaiXeId": {
+                              "_id": "6a1c406192cc8d5a1134aa20",
+                              "tenLoaiXe": "Xe tay ga"
+                            },
+                            "tenDongXe": "Vision"
+                          },
+                          "mauSac": "Đỏ",
+                          "namSanXuat": 2025,
+                          "trangThaiXe": "ConHang"
+                        },
+                        "giaBan": 32000000
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/customers/update/6a1c406192cc8d5a1134aa2d": {
+      "post": {
+        "tags": [
+          "Khách hàng"
+        ],
+        "summary": "Cập nhật thông tin khách hàng",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hoTen": {
+                    "type": "string"
+                  },
+                  "cccd": {
+                    "type": "string"
+                  },
+                  "soDienThoai": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "diaChi": {
+                    "type": "string"
+                  },
+                  "avatar": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update customer successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update customer successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2d",
+                    "tenDangNhap": "kh001",
+                    "hoTen": "Le Van A",
+                    "cccd": "012345678901",
+                    "soDienThoai": "0988888888",
+                    "email": "levana_new@gmail.com",
+                    "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM",
+                    "trangThai": true,
+                    "token": "nBSJ2dZz5x2XfNHm4fn7miJCpnRKab",
+                    "avatar": "https://res.cloudinary.com/dzbvf0maj/image/upload/v1780326987/px5csm1nli2adfu4qqyq.jpg"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -220,8 +1062,10 @@
     },
     "/auth/sign-in": {
       "post": {
-        "tags": ["Auth"],
-        "summary": "Đăng nhập người dùng",
+        "tags": [
+          "Auth User"
+        ],
+        "summary": "Đăng nhập khách hàng",
         "requestBody": {
           "required": true,
           "content": {
@@ -230,34 +1074,32 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "type": "string",
-                    "example": "kh001"
+                    "type": "string"
                   },
                   "password": {
-                    "type": "string",
-                    "example": "123456"
+                    "type": "string"
                   }
-                },
-                "required": ["username", "password"]
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Dang nhap thanh cong!",
+            "description": "Sign-in successful",
             "content": {
               "application/json": {
                 "example": {
-                  "message": "Sign-in successful",
-                  "user": {
-                    "id": "6a1bf84cdbf514b834332839",
-                    "fullName": "Lê Văn A",
-                    "email": "a@gmail.com",
-                    "phoneNumber": "0911111111",
-                    "address": "HCM",
+                  "message": "Đăng nhập thành công",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2d",
+                    "tenDangNhap": "kh001",
+                    "hoTen": "Le Van A",
                     "cccd": "012345678901",
-                    "status": true
+                    "soDienThoai": "0988888888",
+                    "email": "levana_new@gmail.com",
+                    "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM",
+                    "token": "nBSJ2dZz5x2XfNHm4fn7miJCpnRKab"
                   }
                 }
               }
@@ -274,8 +1116,10 @@
     },
     "/auth/sign-up": {
       "post": {
-        "tags": ["Auth"],
-        "summary": "Đăng ký người dùng",
+        "tags": [
+          "Auth User"
+        ],
+        "summary": "Đăng ký khách hàng",
         "requestBody": {
           "required": true,
           "content": {
@@ -284,51 +1128,90 @@
                 "type": "object",
                 "properties": {
                   "username": {
-                    "type": "string",
-                    "example": "buoithanhminh"
+                    "type": "string"
                   },
                   "password": {
-                    "type": "string",
-                    "example": "minhbuoi123"
+                    "type": "string"
                   },
                   "fullName": {
-                    "type": "string",
-                    "example": "Nguyễn Thanh Minh"
+                    "type": "string"
                   },
                   "cccd": {
-                    "type": "string",
-                    "example": "012345678912"
+                    "type": "string"
                   },
                   "phoneNumber": {
-                    "type": "string",
-                    "example": "0987654321"
+                    "type": "string"
                   },
                   "email": {
-                    "type": "string",
-                    "format": "email",
-                    "example": "thanhminh@gmail.com"
+                    "type": "string"
                   },
                   "address": {
-                    "type": "string",
-                    "example": "Số 123 Đường Ba Đình, Hà Nội"
+                    "type": "string"
                   }
-                },
-                "required": [
-                  "username",
-                  "password",
-                  "fullName",
-                  "cccd",
-                  "phoneNumber",
-                  "email",
-                  "address"
-                ]
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": {}
+            "description": "Sign-up successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Đăng ký thành công",
+                  "data": {
+                    "khachHangId": {
+                      "_id": "6a1d3f31ee228fea775a747",
+                      "tenDangNhap": "kh002",
+                      "hoTen": "Tran Thi B",
+                      "cccd": "098765432109",
+                      "token": "abc123",
+                      "soDienThoai": "0977777777",
+                      "email": "trantbib@example.com",
+                      "diaChi": "456 Đường Trần Hưng Đạo, Quận 5, TP HCM",
+                      "trangThai": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing fields or User exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/sign-out": {
+      "post": {
+        "tags": [
+          "Auth User"
+        ],
+        "summary": "Đăng xuất khách hàng",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "cookie",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sign-out successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Đăng xuất thành công"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -339,16 +1222,125 @@
         }
       }
     },
-    "/auth/sign-out": {
+    "/admin/auth/sign-in": {
       "post": {
-        "tags": ["Auth"],
-        "summary": "Đăng xuất người dùng",
+        "tags": [
+          "Auth Admin"
+        ],
+        "summary": "Đăng nhập nhân viên",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenDangNhap": {
+                    "type": "string"
+                  },
+                  "matKhau": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sign-in successful",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Username and password required"
+          },
+          "401": {
+            "description": "Invalid username or password"
+          },
+          "403": {
+            "description": "Account is inactive"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/auth/sign-up": {
+      "post": {
+        "tags": [
+          "Auth Admin"
+        ],
+        "summary": "Đăng ký nhân viên",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenDangNhap": {
+                    "type": "string"
+                  },
+                  "matKhau": {
+                    "type": "string"
+                  },
+                  "vaiTroId": {
+                    "type": "string"
+                  },
+                  "hoTen": {
+                    "type": "string"
+                  },
+                  "soDienThoai": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "trangThai": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sign-up successful",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            }
+          },
+          "400": {
+            "description": "All fields are required"
+          },
+          "409": {
+            "description": "Username already exists"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/auth/sign-out": {
+      "post": {
+        "tags": [
+          "Auth Admin"
+        ],
+        "summary": "Đăng xuất nhân viên",
         "parameters": [
           {
             "name": "token",
             "in": "cookie",
             "required": true,
-            "description": "Cookie chứa token xác thực của người dùng",
             "schema": {
               "type": "string"
             }
@@ -356,10 +1348,480 @@
         ],
         "responses": {
           "200": {
-            "description": {}
+            "description": "Sign-out successful",
+            "content": {
+              "application/json": {
+                "example": {}
+              }
+            }
           },
-          "401": {
-            "description": "Unauthorized"
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/uploads/single": {
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "Upload một file ảnh",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Upload successful",
+                  "data": {
+                    "url": "https://res.cloudinary.com/dzbvf0maj/image/upload/v1780326987/px5csm1nli2adfu4qqyq.jpg"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No file uploaded"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/uploads/multiple": {
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "Upload nhiều file ảnh",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hinhAnh": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upload successful",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Upload successful",
+                  "data": [
+                    {
+                      "url": "https://res.cloudinary.com/dzbvf0maj/image/upload/v1780326987/px5csm1nli2adfu4qqyq.jpg"
+                    },
+                    {
+                      "url": "https://res.cloudinary.com/dzbvf0maj/image/upload/v1780326987/px5csm1nli2adfu4qqyq.jpg"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No files uploaded"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "tags": [
+          "Khách hàng"
+        ],
+        "summary": "Lấy danh sách tất cả khách hàng",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all customers successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get all customers successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa2d",
+                      "tenDangNhap": "kh001",
+                      "hoTen": "Le Van A",
+                      "cccd": "012345678901",
+                      "soDienThoai": "0988888888",
+                      "email": "levana_new@gmail.com",
+                      "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM",
+                      "trangThai": true,
+                      "avatar": "https://example.com/avatar.jpg"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "tags": [
+          "Khách hàng"
+        ],
+        "summary": "Lấy chi tiết khách hàng",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get customer successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get customer successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2d",
+                    "tenDangNhap": "kh001",
+                    "hoTen": "Le Van A",
+                    "cccd": "012345678901",
+                    "soDienThoai": "0988888888",
+                    "email": "levana_new@gmail.com",
+                    "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM",
+                    "trangThai": true,
+                    "avatar": "https://example.com/avatar.jpg"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/customers/change-status/{id}": {
+      "post": {
+        "tags": [
+          "Khách hàng"
+        ],
+        "summary": "Vô hiệu hoá/kích hoạt khách hàng",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change customer status successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Change customer status successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2d",
+                    "tenDangNhap": "kh001",
+                    "hoTen": "Le Van A",
+                    "cccd": "012345678901",
+                    "soDienThoai": "0988888888",
+                    "email": "levana_new@gmail.com",
+                    "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM",
+                    "trangThai": false,
+                    "avatar": "https://example.com/avatar.jpg"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/employees": {
+      "get": {
+        "tags": [
+          "Nhân viên"
+        ],
+        "summary": "Lấy danh sách tất cả nhân viên",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all employees successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get all employees successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa2b",
+                      "tenDangNhap": "admin",
+                      "hoTen": "Nguyen Van Admin",
+                      "soDienThoai": "0900000001",
+                      "email": "admin@gmail.com",
+                      "trangThai": true,
+                      "vaiTro": {
+                        "_id": "6a1c406192cc8d5a1134aa2a",
+                        "tenVaiTro": "Quản trị viên"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/employees/{id}": {
+      "get": {
+        "tags": [
+          "Nhân viên"
+        ],
+        "summary": "Lấy chi tiết nhân viên",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get employee successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get employee successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2b",
+                    "tenDangNhap": "admin",
+                    "hoTen": "Nguyen Van Admin",
+                    "soDienThoai": "0900000001",
+                    "email": "admin@gmail.com",
+                    "trangThai": true,
+                    "vaiTro": {
+                      "_id": "6a1c406192cc8d5a1134aa2a",
+                      "tenVaiTro": "Quản trị viên"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/employees/update/{id}": {
+      "post": {
+        "tags": [
+          "Nhân viên"
+        ],
+        "summary": "Cập nhật thông tin nhân viên",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "hoTen": {
+                    "type": "string"
+                  },
+                  "soDienThoai": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "vaiTroId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update employee successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update employee successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2b",
+                    "tenDangNhap": "admin",
+                    "hoTen": "Nguyen Van Admin",
+                    "soDienThoai": "0900000001",
+                    "email": "admin@gmail.com",
+                    "trangThai": true,
+                    "vaiTro": {
+                      "_id": "6a1c406192cc8d5a1134aa2a",
+                      "tenVaiTro": "Quản trị viên"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/admin/employees/change-status/{id}": {
+      "post": {
+        "tags": [
+          "Nhân viên"
+        ],
+        "summary": "Vô hiệu hoá/kích hoạt nhân viên",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Change employee status successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Change employee status successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2b",
+                    "tenDangNhap": "admin",
+                    "hoTen": "Nguyen Van Admin",
+                    "soDienThoai": "0900000001",
+                    "email": "admin@gmail.com",
+                    "trangThai": false,
+                    "vaiTro": {
+                      "_id": "6a1c406192cc8d5a1134aa2a",
+                      "tenVaiTro": "Quản trị viên"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -368,9 +1830,12 @@
       }
     }
   },
-  "security": [
-    {
-      "BearerAuth": []
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
     }
-  ]
+  }
 }

@@ -26,7 +26,29 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }))) !== null && _a !== void 0 ? _a : [];
         return res.status(200).json({
             message: "Get all vehicles successfully",
-            data: vehicles,
+            data: vehicles.map((v) => ({
+                _id: v._id,
+                soKhung: v.soKhung,
+                soMay: v.soMay,
+                hinhAnh: v.hinhAnh,
+                dongXe: v.dongXeId ? {
+                    _id: v.dongXeId._id,
+                    loaiXe: v.dongXeId.loaiXeId ? {
+                        _id: v.dongXeId.loaiXeId._id,
+                        tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
+                        moTa: v.dongXeId.loaiXeId.moTa,
+                    } : null,
+                    tenDongXe: v.dongXeId.tenDongXe,
+                    namSanXuat: v.dongXeId.namSanXuat,
+                    giaNiemYet: v.dongXeId.giaNiemYet,
+                    dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+                    mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+                    moTa: v.dongXeId.moTa,
+                } : null,
+                mauSac: v.mauSac,
+                namSanXuat: v.namSanXuat,
+                trangThaiXe: v.trangThaiXe,
+            })),
         });
     }
     catch (error) {
@@ -45,9 +67,28 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         if (!vehicle) {
             return res.status(404).json({ message: "Vehicle not found" });
         }
+        const v = vehicle;
         return res.status(200).json({
             message: "Get vehicle detail successfully",
-            data: vehicle,
+            data: {
+                _id: v._id,
+                soKhung: v.soKhung,
+                soMay: v.soMay,
+                hinhAnh: v.hinhAnh,
+                dongXe: v.dongXeId ? {
+                    _id: v.dongXeId._id,
+                    loaiXeId: v.dongXeId.loaiXeId,
+                    tenDongXe: v.dongXeId.tenDongXe,
+                    namSanXuat: v.dongXeId.namSanXuat,
+                    giaNiemYet: v.dongXeId.giaNiemYet,
+                    dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+                    mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+                    moTa: v.dongXeId.moTa,
+                } : null,
+                mauSac: v.mauSac,
+                namSanXuat: v.namSanXuat,
+                trangThaiXe: v.trangThaiXe,
+            },
         });
     }
     catch (error) {
@@ -82,7 +123,16 @@ const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         yield newVehicle.save();
         return res.status(201).json({
             message: "Add vehicle successfully",
-            data: newVehicle,
+            data: {
+                _id: newVehicle._id,
+                soKhung: newVehicle.soKhung,
+                soMay: newVehicle.soMay,
+                hinhAnh: newVehicle.hinhAnh,
+                dongXeId: newVehicle.dongXeId,
+                mauSac: newVehicle.mauSac,
+                namSanXuat: newVehicle.namSanXuat,
+                trangThaiXe: newVehicle.trangThaiXe,
+            },
         });
     }
     catch (error) {
@@ -104,7 +154,16 @@ const updateVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         return res.status(200).json({
             message: "Update vehicle successfully",
-            data: vehicle,
+            data: {
+                _id: vehicle._id,
+                soKhung: vehicle.soKhung,
+                soMay: vehicle.soMay,
+                hinhAnh: vehicle.hinhAnh,
+                dongXeId: vehicle.dongXeId,
+                mauSac: vehicle.mauSac,
+                namSanXuat: vehicle.namSanXuat,
+                trangThaiXe: vehicle.trangThaiXe,
+            },
         });
     }
     catch (error) {
@@ -122,7 +181,16 @@ const deleteVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
         return res.status(200).json({
             message: "Delete vehicle successfully",
-            data: vehicle,
+            data: {
+                _id: vehicle._id,
+                soKhung: vehicle.soKhung,
+                soMay: vehicle.soMay,
+                hinhAnh: vehicle.hinhAnh,
+                dongXeId: vehicle.dongXeId,
+                mauSac: vehicle.mauSac,
+                namSanXuat: vehicle.namSanXuat,
+                trangThaiXe: vehicle.trangThaiXe,
+            },
         });
     }
     catch (error) {

@@ -7,7 +7,11 @@ export const index = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Get list of vehicle categories successfully",
-      data: categories,
+      data: categories.map((cat: any) => ({
+        _id: cat._id,
+        tenLoaiXe: cat.tenLoaiXe,
+        moTa: cat.moTa,
+      })),
     });
   } catch (error) {
     console.error("Error when getting vehicle categories! " + error);
@@ -45,7 +49,11 @@ export const addCategory = async (req: Request, res: Response) => {
 
     return res.status(201).json({
       message: "Add vehicle category successfully",
-      data: newCategory,
+      data: {
+        _id: newCategory._id,
+        tenLoaiXe: newCategory.tenLoaiXe,
+        moTa: newCategory.moTa,
+      },
     });
   } catch (error) {
     console.error("Error when adding vehicle category! " + error);
@@ -69,7 +77,11 @@ export const deleteCategory = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       message: "Delete vehicle category successfully",
-      data: category,
+      data: {
+        _id: category._id,
+        tenLoaiXe: category.tenLoaiXe,
+        moTa: category.moTa,
+      },
     });
   } catch (error) {
     console.error("Error when deleting vehicle category! " + error);
