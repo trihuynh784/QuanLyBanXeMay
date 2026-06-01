@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteVehicle = exports.addVehicle = exports.vehicleDetail = exports.index = void 0;
+exports.deleteVehicle = exports.updateVehicle = exports.addVehicle = exports.vehicleDetail = exports.index = void 0;
 const Xe_1 = __importDefault(require("../models/Xe"));
 require("../models/DongXe");
 require("../models/LoaiXe");
@@ -91,6 +91,28 @@ const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.addVehicle = addVehicle;
+const updateVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
+        if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const vehicle = yield Xe_1.default.findByIdAndUpdate(id, { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh }, { returnDocument: "after" });
+        if (!vehicle) {
+            return res.status(404).json({ message: "Vehicle not found" });
+        }
+        return res.status(200).json({
+            message: "Update vehicle successfully",
+            data: vehicle,
+        });
+    }
+    catch (error) {
+        console.error("Error when updating vehicle! " + error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+exports.updateVehicle = updateVehicle;
 const deleteVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

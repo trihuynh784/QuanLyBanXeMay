@@ -87,6 +87,43 @@ export const addVehicle = async (req: Request, res: Response) => {
   }
 };
 
+export const updateVehicle = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const {
+      soKhung,
+      soMay,
+      dongXeId,
+      mauSac,
+      namSanXuat,
+      trangThaiXe,
+      hinhAnh,
+    } = req.body;
+
+    if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const vehicle = await Xe.findByIdAndUpdate(
+      id,
+      { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh },
+      { returnDocument: "after" },
+    );
+
+    if (!vehicle) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+
+    return res.status(200).json({
+      message: "Update vehicle successfully",
+      data: vehicle,
+    });
+  } catch (error) {
+    console.error("Error when updating vehicle! " + error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const deleteVehicle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

@@ -12,6 +12,7 @@ const XeSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    hinhAnh: String,
     dongXeId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DongXe",

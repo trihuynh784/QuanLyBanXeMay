@@ -12,23 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.customerDetail = void 0;
+exports.updateCustomer = void 0;
 const KhachHang_1 = __importDefault(require("../models/KhachHang"));
-const customerDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
+const updateCustomer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const customer = yield KhachHang_1.default.findById(id);
+        const { id } = req.params;
+        const { hoTen, cccd, soDienThoai, email, diaChi, trangThai, avatar } = req.body;
+        const customer = yield KhachHang_1.default.findByIdAndUpdate(id, { hoTen, cccd, soDienThoai, email, diaChi, trangThai, avatar }, { returnDocument: "after" });
         if (!customer) {
-            return res.status(404).json({ message: "Customer not found!" });
+            return res.status(404).json({ message: "Customer not found" });
         }
         return res.status(200).json({
-            message: "Get customer details successfully",
+            message: "Update customer successfully",
             data: customer,
         });
     }
     catch (error) {
-        console.error("Error when get customer detail! " + error);
+        console.error("Error when updating customer! " + error);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 });
-exports.customerDetail = customerDetail;
+exports.updateCustomer = updateCustomer;

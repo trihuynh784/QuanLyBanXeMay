@@ -15,6 +15,7 @@ const XeSchema = new mongoose_1.default.Schema({
         required: true,
         unique: true,
     },
+    hinhAnh: String,
     dongXeId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "DongXe",

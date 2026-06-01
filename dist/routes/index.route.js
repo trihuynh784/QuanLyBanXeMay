@@ -8,6 +8,7 @@ const vehicleModel_route_1 = __importDefault(require("./vehicleModel.route"));
 const vehicleCategory_route_1 = __importDefault(require("./vehicleCategory.route"));
 const auth_route_1 = __importDefault(require("./auth.route"));
 const upload_route_1 = __importDefault(require("./upload.route"));
+const customer_route_1 = __importDefault(require("./customer.route"));
 const baseURL = "/api";
 const clientRoute = (app) => {
     app.use(baseURL + "/vehicles", vehicle_route_1.default);
@@ -15,5 +16,6 @@ const clientRoute = (app) => {
     app.use(baseURL + "/vehicle-categories", vehicleCategory_route_1.default);
     app.use(baseURL + "/uploads", upload_route_1.default);
     app.use(baseURL + "/auth", auth_route_1.default);
+    app.use(baseURL + "/customers", customer_route_1.default);
 };
 exports.default = clientRoute;
