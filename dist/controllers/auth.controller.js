@@ -86,6 +86,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             cccd,
             soDienThoai: phoneNumber,
             email,
+            avatar: req.body.avatar || "",
             diaChi: address,
         });
         yield newUser.save();
@@ -104,6 +105,7 @@ const signUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 phoneNumber: newUser.soDienThoai,
                 address: newUser.diaChi,
                 cccd: newUser.cccd,
+                avatar: newUser.avatar,
                 status: newUser.trangThai,
             },
         });

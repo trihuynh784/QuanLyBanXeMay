@@ -28,7 +28,7 @@ export const vehicleDetail = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     const vehicle = await Xe.findOne({
-      id,
+      _id: id,
       deleted: false,
     }).populate({ path: "dongXeId" });
 

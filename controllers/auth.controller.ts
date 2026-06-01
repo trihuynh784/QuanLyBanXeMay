@@ -87,6 +87,7 @@ export const signUp = async (req: Request, res: Response) => {
       cccd,
       soDienThoai: phoneNumber,
       email,
+      avatar: req.body.avatar || "",
       diaChi: address,
     });
     await newUser.save();
@@ -106,6 +107,7 @@ export const signUp = async (req: Request, res: Response) => {
         phoneNumber: newUser.soDienThoai,
         address: newUser.diaChi,
         cccd: newUser.cccd,
+        avatar: newUser.avatar,
         status: newUser.trangThai,
       },
     });

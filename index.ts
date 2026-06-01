@@ -4,13 +4,16 @@ import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import cookieParser from "cookie-parser";
 import fs from "fs";
+import cors from "cors";
 dotenv.config();
 
 import clientRoute from "./routes/index.route";
 import adminRoute from "./routes/admin/index.route";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const port = process.env.PORT || 5000;
 

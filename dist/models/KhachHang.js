@@ -39,6 +39,10 @@ const KhachHangSchema = new mongoose_1.default.Schema({
         type: Boolean,
         default: true,
     },
+    avatar: {
+        type: String,
+        default: "",
+    },
 }, {
     timestamps: true,
 });

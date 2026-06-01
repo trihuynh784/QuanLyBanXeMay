@@ -39,7 +39,7 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id } = req.params;
         const vehicle = yield Xe_1.default.findOne({
-            id,
+            _id: id,
             deleted: false,
         }).populate({ path: "dongXeId" });
         if (!vehicle) {
