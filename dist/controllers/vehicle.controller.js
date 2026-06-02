@@ -31,20 +31,24 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 soKhung: v.soKhung,
                 soMay: v.soMay,
                 hinhAnh: v.hinhAnh,
-                dongXe: v.dongXeId ? {
-                    _id: v.dongXeId._id,
-                    loaiXe: v.dongXeId.loaiXeId ? {
-                        _id: v.dongXeId.loaiXeId._id,
-                        tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
-                        moTa: v.dongXeId.loaiXeId.moTa,
-                    } : null,
-                    tenDongXe: v.dongXeId.tenDongXe,
-                    namSanXuat: v.dongXeId.namSanXuat,
-                    giaNiemYet: v.dongXeId.giaNiemYet,
-                    dungTichXiLanh: v.dongXeId.dungTichXiLanh,
-                    mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
-                    moTa: v.dongXeId.moTa,
-                } : null,
+                dongXe: v.dongXeId
+                    ? {
+                        _id: v.dongXeId._id,
+                        loaiXe: v.dongXeId.loaiXeId
+                            ? {
+                                _id: v.dongXeId.loaiXeId._id,
+                                tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
+                                moTa: v.dongXeId.loaiXeId.moTa,
+                            }
+                            : null,
+                        tenDongXe: v.dongXeId.tenDongXe,
+                        namSanXuat: v.dongXeId.namSanXuat,
+                        giaNiemYet: v.dongXeId.giaNiemYet,
+                        dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+                        mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+                        moTa: v.dongXeId.moTa,
+                    }
+                    : null,
                 mauSac: v.mauSac,
                 namSanXuat: v.namSanXuat,
                 trangThaiXe: v.trangThaiXe,
@@ -75,16 +79,18 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 soKhung: v.soKhung,
                 soMay: v.soMay,
                 hinhAnh: v.hinhAnh,
-                dongXe: v.dongXeId ? {
-                    _id: v.dongXeId._id,
-                    loaiXeId: v.dongXeId.loaiXeId,
-                    tenDongXe: v.dongXeId.tenDongXe,
-                    namSanXuat: v.dongXeId.namSanXuat,
-                    giaNiemYet: v.dongXeId.giaNiemYet,
-                    dungTichXiLanh: v.dongXeId.dungTichXiLanh,
-                    mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
-                    moTa: v.dongXeId.moTa,
-                } : null,
+                dongXe: v.dongXeId
+                    ? {
+                        _id: v.dongXeId._id,
+                        loaiXeId: v.dongXeId.loaiXeId,
+                        tenDongXe: v.dongXeId.tenDongXe,
+                        namSanXuat: v.dongXeId.namSanXuat,
+                        giaNiemYet: v.dongXeId.giaNiemYet,
+                        dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+                        mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+                        moTa: v.dongXeId.moTa,
+                    }
+                    : null,
                 mauSac: v.mauSac,
                 namSanXuat: v.namSanXuat,
                 trangThaiXe: v.trangThaiXe,
@@ -99,12 +105,13 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.vehicleDetail = vehicleDetail;
 const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe } = req.body;
-        if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+        const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
+        if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
             return res.status(400).json({ message: "Missing required fields" });
         }
         const existingVehicle = yield Xe_1.default.findOne({
             $or: [{ soKhung }, { soMay }],
+            deleted: false,
         });
         if (existingVehicle) {
             return res
@@ -118,6 +125,7 @@ const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             mauSac,
             namSanXuat,
             trangThaiXe: trangThaiXe || "ConHang",
+            hinhAnh,
             deleted: false,
         });
         yield newVehicle.save();

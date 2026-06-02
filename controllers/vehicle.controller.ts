@@ -20,20 +20,24 @@ export const index = async (req: Request, res: Response) => {
         soKhung: v.soKhung,
         soMay: v.soMay,
         hinhAnh: v.hinhAnh,
-        dongXe: v.dongXeId ? {
-          _id: v.dongXeId._id,
-          loaiXe: v.dongXeId.loaiXeId ? {
-            _id: v.dongXeId.loaiXeId._id,
-            tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
-            moTa: v.dongXeId.loaiXeId.moTa,
-          } : null,
-          tenDongXe: v.dongXeId.tenDongXe,
-          namSanXuat: v.dongXeId.namSanXuat,
-          giaNiemYet: v.dongXeId.giaNiemYet,
-          dungTichXiLanh: v.dongXeId.dungTichXiLanh,
-          mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
-          moTa: v.dongXeId.moTa,
-        } : null,
+        dongXe: v.dongXeId
+          ? {
+              _id: v.dongXeId._id,
+              loaiXe: v.dongXeId.loaiXeId
+                ? {
+                    _id: v.dongXeId.loaiXeId._id,
+                    tenLoaiXe: v.dongXeId.loaiXeId.tenLoaiXe,
+                    moTa: v.dongXeId.loaiXeId.moTa,
+                  }
+                : null,
+              tenDongXe: v.dongXeId.tenDongXe,
+              namSanXuat: v.dongXeId.namSanXuat,
+              giaNiemYet: v.dongXeId.giaNiemYet,
+              dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+              mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+              moTa: v.dongXeId.moTa,
+            }
+          : null,
         mauSac: v.mauSac,
         namSanXuat: v.namSanXuat,
         trangThaiXe: v.trangThaiXe,
@@ -66,16 +70,18 @@ export const vehicleDetail = async (req: Request, res: Response) => {
         soKhung: v.soKhung,
         soMay: v.soMay,
         hinhAnh: v.hinhAnh,
-        dongXe: v.dongXeId ? {
-          _id: v.dongXeId._id,
-          loaiXeId: v.dongXeId.loaiXeId,
-          tenDongXe: v.dongXeId.tenDongXe,
-          namSanXuat: v.dongXeId.namSanXuat,
-          giaNiemYet: v.dongXeId.giaNiemYet,
-          dungTichXiLanh: v.dongXeId.dungTichXiLanh,
-          mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
-          moTa: v.dongXeId.moTa,
-        } : null,
+        dongXe: v.dongXeId
+          ? {
+              _id: v.dongXeId._id,
+              loaiXeId: v.dongXeId.loaiXeId,
+              tenDongXe: v.dongXeId.tenDongXe,
+              namSanXuat: v.dongXeId.namSanXuat,
+              giaNiemYet: v.dongXeId.giaNiemYet,
+              dungTichXiLanh: v.dongXeId.dungTichXiLanh,
+              mucTieuThuNhienLieu: v.dongXeId.mucTieuThuNhienLieu,
+              moTa: v.dongXeId.moTa,
+            }
+          : null,
         mauSac: v.mauSac,
         namSanXuat: v.namSanXuat,
         trangThaiXe: v.trangThaiXe,
@@ -89,15 +95,23 @@ export const vehicleDetail = async (req: Request, res: Response) => {
 
 export const addVehicle = async (req: Request, res: Response) => {
   try {
-    const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe } =
-      req.body;
+    const {
+      soKhung,
+      soMay,
+      dongXeId,
+      mauSac,
+      namSanXuat,
+      trangThaiXe,
+      hinhAnh,
+    } = req.body;
 
-    if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+    if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     const existingVehicle = await Xe.findOne({
       $or: [{ soKhung }, { soMay }],
+      deleted: false,
     });
 
     if (existingVehicle) {
@@ -113,6 +127,7 @@ export const addVehicle = async (req: Request, res: Response) => {
       mauSac,
       namSanXuat,
       trangThaiXe: trangThaiXe || "ConHang",
+      hinhAnh,
       deleted: false,
     });
 
