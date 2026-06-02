@@ -56,9 +56,7 @@
   "paths": {
     "/vehicles": {
       "get": {
-        "tags": [
-          "Xe"
-        ],
+        "tags": ["Xe"],
         "summary": "Lấy danh sách xe",
         "responses": {
           "200": {
@@ -147,9 +145,7 @@
     },
     "/vehicles/detail/6a1c406192cc8d5a1134aa27": {
       "get": {
-        "tags": [
-          "Xe"
-        ],
+        "tags": ["Xe"],
         "summary": "Lấy chi tiết xe theo ID",
         "parameters": [
           {
@@ -201,9 +197,7 @@
     },
     "/vehicles/add": {
       "post": {
-        "tags": [
-          "Xe"
-        ],
+        "tags": ["Xe"],
         "summary": "Thêm xe mới vào hệ thống",
         "security": [
           {
@@ -278,9 +272,7 @@
     },
     "/vehicles/update/6a1c406192cc8d5a1134aa27": {
       "post": {
-        "tags": [
-          "Xe"
-        ],
+        "tags": ["Xe"],
         "summary": "Cập nhật thông tin xe",
         "security": [
           {
@@ -366,9 +358,7 @@
     },
     "/vehicles/delete/6a1c406192cc8d5a1134aa26": {
       "delete": {
-        "tags": [
-          "Xe"
-        ],
+        "tags": ["Xe"],
         "summary": "Xóa xe (Soft delete)",
         "security": [
           {
@@ -416,9 +406,7 @@
     },
     "/vehicle-models": {
       "get": {
-        "tags": [
-          "Dòng Xe"
-        ],
+        "tags": ["Dòng Xe"],
         "summary": "Lấy danh sách dòng xe",
         "responses": {
           "200": {
@@ -461,9 +449,7 @@
     },
     "/vehicle-models/add": {
       "post": {
-        "tags": [
-          "Dòng Xe"
-        ],
+        "tags": ["Dòng Xe"],
         "summary": "Thêm dòng xe mới",
         "security": [
           {
@@ -515,11 +501,94 @@
         }
       }
     },
+    "/vehicle-models/update/{id}": {
+      "post": {
+        "tags": ["Dòng Xe"],
+        "summary": "Cập nhật dòng xe",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenDongXe": {
+                    "type": "string"
+                  },
+                  "loaiXeId": {
+                    "type": "string"
+                  },
+                  "namSanXuat": {
+                    "type": "integer"
+                  },
+                  "giaNiemYet": {
+                    "type": "integer"
+                  },
+                  "dungTichXiLanh": {
+                    "type": "integer"
+                  },
+                  "mucTieuThuNhienLieu": {
+                    "type": "number"
+                  },
+                  "moTa": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update model successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update vehicle model successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa22",
+                    "loaiXeId": "6a1c406192cc8d5a1134aa11",
+                    "tenDongXe": "Sh 160i Thể Thaoo 2027",
+                    "namSanXuat": 2027,
+                    "giaNiemYet": 120000000,
+                    "dungTichXiLanh": 160,
+                    "mucTieuThuNhienLieu": 3.6,
+                    "moTa": "Khang yeu Minh"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/vehicle-models/delete/6a1c607e5889ed799b159c39": {
       "delete": {
-        "tags": [
-          "Dòng Xe"
-        ],
+        "tags": ["Dòng Xe"],
         "summary": "Xóa dòng xe",
         "security": [
           {
@@ -568,9 +637,7 @@
     },
     "/vehicle-categories": {
       "get": {
-        "tags": [
-          "Loại Xe"
-        ],
+        "tags": ["Loại Xe"],
         "summary": "Lấy danh sách loại xe",
         "responses": {
           "200": {
@@ -618,9 +685,7 @@
     },
     "/vehicle-categories/add": {
       "post": {
-        "tags": [
-          "Loại Xe"
-        ],
+        "tags": ["Loại Xe"],
         "summary": "Thêm loại xe mới",
         "security": [
           {
@@ -664,11 +729,74 @@
         }
       }
     },
+    "/vehicle-categories/update/{id}": {
+      "post": {
+        "tags": ["Loại Xe"],
+        "summary": "Cập nhật loại xe",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tenLoaiXe": {
+                    "type": "string"
+                  },
+                  "moTa": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update category successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update vehicle category successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa1f",
+                    "tenLoaiXe": "Xe số Minh",
+                    "moTa": "Khang yeu Minh"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/vehicle-categories/delete/6a1daed660b1f8575872b545": {
       "delete": {
-        "tags": [
-          "Loại Xe"
-        ],
+        "tags": ["Loại Xe"],
         "summary": "Xóa loại xe",
         "security": [
           {
@@ -712,9 +840,7 @@
     },
     "/orders": {
       "get": {
-        "tags": [
-          "Đơn hàng"
-        ],
+        "tags": ["Đơn hàng"],
         "summary": "Lấy danh sách tất cả đơn hàng",
         "security": [
           {
@@ -766,9 +892,7 @@
                           "mauSac": "Đỏ",
                           "namSanXuat": 2025,
                           "trangThaiXe": "ConHang",
-                          "hinhAnh": [
-                            ""
-                          ]
+                          "hinhAnh": [""]
                         },
                         "giaBan": 32000000
                       }
@@ -827,9 +951,7 @@
     },
     "/orders/add": {
       "post": {
-        "tags": [
-          "Đơn hàng"
-        ],
+        "tags": ["Đơn hàng"],
         "summary": "Tạo đơn hàng mới",
         "security": [
           {
@@ -895,9 +1017,7 @@
     },
     "/orders/6a1c406192cc8d5a1134aa2e": {
       "get": {
-        "tags": [
-          "Đơn hàng"
-        ],
+        "tags": ["Đơn hàng"],
         "summary": "Lấy chi tiết đơn hàng theo ID",
         "security": [
           {
@@ -979,9 +1099,7 @@
     },
     "/customers/update/6a1c406192cc8d5a1134aa2d": {
       "post": {
-        "tags": [
-          "Khách hàng"
-        ],
+        "tags": ["Khách hàng"],
         "summary": "Cập nhật thông tin khách hàng",
         "security": [
           {
@@ -1062,9 +1180,7 @@
     },
     "/auth/sign-in": {
       "post": {
-        "tags": [
-          "Auth User"
-        ],
+        "tags": ["Auth User"],
         "summary": "Đăng nhập khách hàng",
         "requestBody": {
           "required": true,
@@ -1116,9 +1232,7 @@
     },
     "/auth/sign-up": {
       "post": {
-        "tags": [
-          "Auth User"
-        ],
+        "tags": ["Auth User"],
         "summary": "Đăng ký khách hàng",
         "requestBody": {
           "required": true,
@@ -1188,9 +1302,7 @@
     },
     "/auth/sign-out": {
       "post": {
-        "tags": [
-          "Auth User"
-        ],
+        "tags": ["Auth User"],
         "summary": "Đăng xuất khách hàng",
         "parameters": [
           {
@@ -1224,9 +1336,7 @@
     },
     "/admin/auth/sign-in": {
       "post": {
-        "tags": [
-          "Auth Admin"
-        ],
+        "tags": ["Auth Admin"],
         "summary": "Đăng nhập nhân viên",
         "requestBody": {
           "required": true,
@@ -1272,9 +1382,7 @@
     },
     "/admin/auth/sign-up": {
       "post": {
-        "tags": [
-          "Auth Admin"
-        ],
+        "tags": ["Auth Admin"],
         "summary": "Đăng ký nhân viên",
         "requestBody": {
           "required": true,
@@ -1332,9 +1440,7 @@
     },
     "/admin/auth/sign-out": {
       "post": {
-        "tags": [
-          "Auth Admin"
-        ],
+        "tags": ["Auth Admin"],
         "summary": "Đăng xuất nhân viên",
         "parameters": [
           {
@@ -1363,9 +1469,7 @@
     },
     "/uploads/single": {
       "post": {
-        "tags": [
-          "Upload"
-        ],
+        "tags": ["Upload"],
         "summary": "Upload một file ảnh",
         "requestBody": {
           "required": true,
@@ -1408,9 +1512,7 @@
     },
     "/uploads/multiple": {
       "post": {
-        "tags": [
-          "Upload"
-        ],
+        "tags": ["Upload"],
         "summary": "Upload nhiều file ảnh",
         "requestBody": {
           "required": true,
@@ -1461,9 +1563,7 @@
     },
     "/customers": {
       "get": {
-        "tags": [
-          "Khách hàng"
-        ],
+        "tags": ["Khách hàng"],
         "summary": "Lấy danh sách tất cả khách hàng",
         "security": [
           {
@@ -1502,9 +1602,7 @@
     },
     "/customers/{id}": {
       "get": {
-        "tags": [
-          "Khách hàng"
-        ],
+        "tags": ["Khách hàng"],
         "summary": "Lấy chi tiết khách hàng",
         "security": [
           {
@@ -1554,9 +1652,7 @@
     },
     "/customers/change-status/{id}": {
       "post": {
-        "tags": [
-          "Khách hàng"
-        ],
+        "tags": ["Khách hàng"],
         "summary": "Vô hiệu hoá/kích hoạt khách hàng",
         "security": [
           {
@@ -1606,9 +1702,7 @@
     },
     "/admin/employees": {
       "get": {
-        "tags": [
-          "Nhân viên"
-        ],
+        "tags": ["Nhân viên"],
         "summary": "Lấy danh sách tất cả nhân viên",
         "security": [
           {
@@ -1648,9 +1742,7 @@
     },
     "/admin/employees/{id}": {
       "get": {
-        "tags": [
-          "Nhân viên"
-        ],
+        "tags": ["Nhân viên"],
         "summary": "Lấy chi tiết nhân viên",
         "security": [
           {
@@ -1701,9 +1793,7 @@
     },
     "/admin/employees/update/{id}": {
       "post": {
-        "tags": [
-          "Nhân viên"
-        ],
+        "tags": ["Nhân viên"],
         "summary": "Cập nhật thông tin nhân viên",
         "security": [
           {
@@ -1778,9 +1868,7 @@
     },
     "/admin/employees/change-status/{id}": {
       "post": {
-        "tags": [
-          "Nhân viên"
-        ],
+        "tags": ["Nhân viên"],
         "summary": "Vô hiệu hoá/kích hoạt nhân viên",
         "security": [
           {

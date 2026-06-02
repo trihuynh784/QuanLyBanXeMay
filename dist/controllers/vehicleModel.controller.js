@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteModel = exports.addModel = exports.index = void 0;
+exports.deleteModel = exports.updateModel = exports.addModel = exports.index = void 0;
 const DongXe_1 = __importDefault(require("../models/DongXe"));
 const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -90,6 +90,57 @@ const addModel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.addModel = addModel;
+const updateModel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { loaiXeId, tenDongXe, namSanXuat, giaNiemYet, dungTichXiLanh, mucTieuThuNhienLieu, moTa, } = req.body;
+        if (!loaiXeId ||
+            !tenDongXe ||
+            !namSanXuat ||
+            !giaNiemYet ||
+            !dungTichXiLanh) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const existingModel = yield DongXe_1.default.findOne({
+            tenDongXe,
+            _id: { $ne: id },
+            deleted: false
+        });
+        if (existingModel) {
+            return res.status(400).json({ message: "Vehicle model name already exists" });
+        }
+        const model = yield DongXe_1.default.findByIdAndUpdate(id, {
+            loaiXeId,
+            tenDongXe,
+            namSanXuat,
+            giaNiemYet,
+            dungTichXiLanh,
+            mucTieuThuNhienLieu,
+            moTa,
+        }, { returnDocument: "after" });
+        if (!model || model.deleted) {
+            return res.status(404).json({ message: "Vehicle model not found" });
+        }
+        return res.status(200).json({
+            message: "Update vehicle model successfully",
+            data: {
+                _id: model._id,
+                loaiXeId: model.loaiXeId,
+                tenDongXe: model.tenDongXe,
+                namSanXuat: model.namSanXuat,
+                giaNiemYet: model.giaNiemYet,
+                dungTichXiLanh: model.dungTichXiLanh,
+                mucTieuThuNhienLieu: model.mucTieuThuNhienLieu,
+                moTa: model.moTa,
+            },
+        });
+    }
+    catch (error) {
+        console.error("Error when updating vehicle model! " + error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+exports.updateModel = updateModel;
 const deleteModel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;

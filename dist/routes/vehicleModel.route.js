@@ -9,5 +9,6 @@ const vehicleModel_controller_1 = require("../controllers/vehicleModel.controlle
 const auth_middleware_1 = require("../middleware/auth.middleware");
 router.get("/", vehicleModel_controller_1.index);
 router.post("/add", auth_middleware_1.authMiddlewareAdmin, vehicleModel_controller_1.addModel);
+router.post("/update/:id", auth_middleware_1.authMiddlewareAdmin, vehicleModel_controller_1.updateModel);
 router.delete("/delete/:id", auth_middleware_1.authMiddlewareAdmin, vehicleModel_controller_1.deleteModel);
 exports.default = router;

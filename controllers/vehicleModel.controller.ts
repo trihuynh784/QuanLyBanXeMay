@@ -91,6 +91,76 @@ export const addModel = async (req: Request, res: Response) => {
   }
 };
 
+export const updateModel = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const {
+      loaiXeId,
+      tenDongXe,
+      namSanXuat,
+      giaNiemYet,
+      dungTichXiLanh,
+      mucTieuThuNhienLieu,
+      moTa,
+    } = req.body;
+
+    if (
+      !loaiXeId ||
+      !tenDongXe ||
+      !namSanXuat ||
+      !giaNiemYet ||
+      !dungTichXiLanh
+    ) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const existingModel = await DongXe.findOne({ 
+      tenDongXe, 
+      _id: { $ne: id },
+      deleted: false 
+    });
+    
+    if (existingModel) {
+      return res.status(400).json({ message: "Vehicle model name already exists" });
+    }
+
+    const model = await DongXe.findByIdAndUpdate(
+      id,
+      {
+        loaiXeId,
+        tenDongXe,
+        namSanXuat,
+        giaNiemYet,
+        dungTichXiLanh,
+        mucTieuThuNhienLieu,
+        moTa,
+      },
+      { returnDocument: "after" }
+    );
+
+    if (!model || model.deleted) {
+      return res.status(404).json({ message: "Vehicle model not found" });
+    }
+
+    return res.status(200).json({
+      message: "Update vehicle model successfully",
+      data: {
+        _id: model._id,
+        loaiXeId: model.loaiXeId,
+        tenDongXe: model.tenDongXe,
+        namSanXuat: model.namSanXuat,
+        giaNiemYet: model.giaNiemYet,
+        dungTichXiLanh: model.dungTichXiLanh,
+        mucTieuThuNhienLieu: model.mucTieuThuNhienLieu,
+        moTa: model.moTa,
+      },
+    });
+  } catch (error) {
+    console.error("Error when updating vehicle model! " + error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const deleteModel = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
