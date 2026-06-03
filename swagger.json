@@ -882,6 +882,44 @@
         }
       }
     },
+    "/orders/my-orders": {
+      "get": {
+        "tags": ["Đơn hàng"],
+        "summary": "Lấy danh sách đơn hàng của khách hàng",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Get my orders successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Get my orders successfully",
+                  "data": [
+                    {
+                      "_id": "6a1c406192cc8d5a1134aa2e",
+                      "khachHangId": "6a1c406192cc8d5a1134aa2d",
+                      "tongTien": 56000000,
+                      "trangThaiDonHang": "DaThanhToan",
+                      "ngayDat": "2024-05-20T10:00:00.000Z",
+                      "chiTiet": {
+                        "_id": "6a1c406192cc8d5a1134aa2f",
+                        "giaBan": 56000000,
+                        "xe": {
+                          "soKhung": "AB001",
+                          "soMay": "AM001",
+                          "dongXe": { "tenDongXe": "Air Blade 160", "loaiXe": { "tenLoaiXe": "Xe tay ga" } }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
     "/orders": {
       "get": {
         "tags": [
@@ -1126,6 +1164,65 @@
           },
           "404": {
             "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/orders/update/{id}": {
+      "post": {
+        "tags": ["Đơn hàng"],
+        "summary": "Cập nhật trạng thái đơn hàng",
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["trangThaiDonHang"],
+                "properties": {
+                  "trangThaiDonHang": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update order successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Update order successfully",
+                  "data": {
+                    "_id": "6a1c406192cc8d5a1134aa2e",
+                    "khachHangId": "6a1c406192cc8d5a1134aa2d",
+                    "tongTien": 56000000,
+                    "trangThaiDonHang": "DaHuy",
+                    "ngayDat": "2024-05-20T10:00:00.000Z",
+                    "createdAt": "2024-05-20T10:00:00.000Z",
+                    "updatedAt": "2024-05-21T10:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required fields"
+          },
+          "404": {
+            "description": "Order not found"
           },
           "500": {
             "description": "Internal Server Error"

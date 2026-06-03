@@ -4,7 +4,7 @@ import ChiTietDonHang from "../models/ChiTietDonHang";
 
 export const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const orders = await DonHang.find({ khachHangId: (req as any).user._id })
+    const orders = await DonHang.find()
       .populate({
         path: "khachHangId",
         select: "hoTen cccd email soDienThoai diaChi",
@@ -77,10 +77,85 @@ export const getAllOrders = async (req: Request, res: Response) => {
   }
 };
 
+export const getMyOrders = async (req: Request, res: Response) => {
+  try {
+    const orders = await DonHang.find({ khachHangId: (req as any).user._id })
+      .populate({
+        path: "khachHangId",
+        select: "hoTen cccd email soDienThoai diaChi",
+      })
+      .lean();
+
+    const orderIds = orders.map((order) => order._id);
+
+    const details = await ChiTietDonHang.find({ donHangId: { $in: orderIds } })
+      .populate({
+        path: "xeId",
+        populate: [
+          {
+            path: "dongXeId",
+            select: "tenDongXe",
+            populate: [
+              {
+                path: "loaiXeId",
+                select: "tenLoaiXe",
+              },
+            ],
+          },
+        ],
+      })
+      .lean();
+
+    const formattedOrders = orders.map((order) => {
+      const detail = details.find(
+        (d) => d.donHangId?.toString() === order._id?.toString(),
+      );
+
+      return {
+        _id: order._id,
+        ngayDat: order.ngayDat,
+        tongTien: order.tongTien,
+        trangThaiDonHang: order.trangThaiDonHang,
+        khachHang: order.khachHangId,
+        chiTiet: detail ? {
+          _id: detail._id,
+          donHangId: detail.donHangId,
+          giaBan: detail.giaBan,
+          xe: detail.xeId ? {
+            _id: (detail.xeId as any)._id,
+            soKhung: (detail.xeId as any).soKhung,
+            soMay: (detail.xeId as any).soMay,
+            hinhAnh: (detail.xeId as any).hinhAnh,
+            mauSac: (detail.xeId as any).mauSac,
+            namSanXuat: (detail.xeId as any).namSanXuat,
+            trangThaiXe: (detail.xeId as any).trangThaiXe,
+            dongXe: (detail.xeId as any).dongXeId ? {
+              _id: (detail.xeId as any).dongXeId._id,
+              tenDongXe: (detail.xeId as any).dongXeId.tenDongXe,
+              loaiXe: (detail.xeId as any).dongXeId.loaiXeId ? {
+                _id: (detail.xeId as any).dongXeId.loaiXeId._id,
+                tenLoaiXe: (detail.xeId as any).dongXeId.loaiXeId.tenLoaiXe,
+              } : null
+            } : null
+          } : null
+        } : null,
+      };
+    });
+
+    return res.status(200).json({
+      message: "Get my orders successfully",
+      data: formattedOrders,
+    });
+  } catch (error) {
+    console.error("Error when getting my orders: " + error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const order = await DonHang.findOne({ _id: id, khachHangId: (req as any).user._id })
+    const order = await DonHang.findById(id)
       .populate({
         path: "khachHangId",
         select: "hoTen cccd email soDienThoai diaChi",
@@ -190,6 +265,35 @@ export const createOrder = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error when creating order: " + error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const updateOrder = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { trangThaiDonHang } = req.body;
+
+    if (!trangThaiDonHang) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const order = await DonHang.findOneAndUpdate(
+      { _id: id, khachHangId: (req as any).user._id },
+      { trangThaiDonHang },
+      { returnDocument: "after" }
+    );
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    return res.status(200).json({
+      message: "Update order successfully",
+      data: order,
+    });
+  } catch (error) {
+    console.error("Error when updating order: " + error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };

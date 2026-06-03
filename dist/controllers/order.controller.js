@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createOrder = exports.getOrderById = exports.getAllOrders = void 0;
+exports.updateOrder = exports.createOrder = exports.getOrderById = exports.getMyOrders = exports.getAllOrders = void 0;
 const DonHang_1 = __importDefault(require("../models/DonHang"));
 const ChiTietDonHang_1 = __importDefault(require("../models/ChiTietDonHang"));
 const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const orders = yield DonHang_1.default.find({ khachHangId: req.user._id })
+        const orders = yield DonHang_1.default.find()
             .populate({
             path: "khachHangId",
             select: "hoTen cccd email soDienThoai diaChi",
@@ -84,10 +84,79 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getAllOrders = getAllOrders;
+const getMyOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const orders = yield DonHang_1.default.find({ khachHangId: req.user._id })
+            .populate({
+            path: "khachHangId",
+            select: "hoTen cccd email soDienThoai diaChi",
+        })
+            .lean();
+        const orderIds = orders.map((order) => order._id);
+        const details = yield ChiTietDonHang_1.default.find({ donHangId: { $in: orderIds } })
+            .populate({
+            path: "xeId",
+            populate: [
+                {
+                    path: "dongXeId",
+                    select: "tenDongXe",
+                    populate: [
+                        {
+                            path: "loaiXeId",
+                            select: "tenLoaiXe",
+                        },
+                    ],
+                },
+            ],
+        })
+            .lean();
+        const formattedOrders = orders.map((order) => {
+            const detail = details.find((d) => { var _a, _b; return ((_a = d.donHangId) === null || _a === void 0 ? void 0 : _a.toString()) === ((_b = order._id) === null || _b === void 0 ? void 0 : _b.toString()); });
+            return {
+                _id: order._id,
+                ngayDat: order.ngayDat,
+                tongTien: order.tongTien,
+                trangThaiDonHang: order.trangThaiDonHang,
+                khachHang: order.khachHangId,
+                chiTiet: detail ? {
+                    _id: detail._id,
+                    donHangId: detail.donHangId,
+                    giaBan: detail.giaBan,
+                    xe: detail.xeId ? {
+                        _id: detail.xeId._id,
+                        soKhung: detail.xeId.soKhung,
+                        soMay: detail.xeId.soMay,
+                        hinhAnh: detail.xeId.hinhAnh,
+                        mauSac: detail.xeId.mauSac,
+                        namSanXuat: detail.xeId.namSanXuat,
+                        trangThaiXe: detail.xeId.trangThaiXe,
+                        dongXe: detail.xeId.dongXeId ? {
+                            _id: detail.xeId.dongXeId._id,
+                            tenDongXe: detail.xeId.dongXeId.tenDongXe,
+                            loaiXe: detail.xeId.dongXeId.loaiXeId ? {
+                                _id: detail.xeId.dongXeId.loaiXeId._id,
+                                tenLoaiXe: detail.xeId.dongXeId.loaiXeId.tenLoaiXe,
+                            } : null
+                        } : null
+                    } : null
+                } : null,
+            };
+        });
+        return res.status(200).json({
+            message: "Get my orders successfully",
+            data: formattedOrders,
+        });
+    }
+    catch (error) {
+        console.error("Error when getting my orders: " + error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+exports.getMyOrders = getMyOrders;
 const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const order = yield DonHang_1.default.findOne({ _id: id, khachHangId: req.user._id })
+        const order = yield DonHang_1.default.findById(id)
             .populate({
             path: "khachHangId",
             select: "hoTen cccd email soDienThoai diaChi",
@@ -191,3 +260,25 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.createOrder = createOrder;
+const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const { trangThaiDonHang } = req.body;
+        if (!trangThaiDonHang) {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+        const order = yield DonHang_1.default.findOneAndUpdate({ _id: id, khachHangId: req.user._id }, { trangThaiDonHang }, { returnDocument: "after" });
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+        return res.status(200).json({
+            message: "Update order successfully",
+            data: order,
+        });
+    }
+    catch (error) {
+        console.error("Error when updating order: " + error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+exports.updateOrder = updateOrder;
