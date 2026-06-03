@@ -914,12 +914,6 @@
                         "email": "levana_new@gmail.com",
                         "diaChi": "123 Đường Lê Lợi, Quận 1, TP HCM"
                       },
-                      "nhanVien": {
-                        "_id": "6a1c406192cc8d5a1134aa2c",
-                        "hoTen": "Tran Van Sale",
-                        "soDienThoai": "0900000002",
-                        "email": "sale@gmail.com"
-                      },
                       "chiTiet": {
                         "_id": "6a1c406192cc8d5a1134aa2f",
                         "donHangId": "6a1c406192cc8d5a1134aa2e",
@@ -957,12 +951,6 @@
                         "soDienThoai": "0907095132",
                         "email": "khangchoigioi1@gmail.com",
                         "diaChi": "Nguyen Van Quy"
-                      },
-                      "nhanVien": {
-                        "_id": "6a1c406192cc8d5a1134aa2b",
-                        "hoTen": "Nguyen Van Admin",
-                        "soDienThoai": "0900000001",
-                        "email": "admin@gmail.com"
                       },
                       "chiTiet": {
                         "_id": "6a1dabfc3b15ea891806fb1b",
@@ -1015,9 +1003,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "khachHangId": {
-                    "type": "string"
-                  },
                   "trangThaiDonHang": {
                     "type": "string"
                   },
@@ -1046,7 +1031,6 @@
                   "message": "Create order successfully",
                   "data": {
                     "khachHangId": "6a1d3ec45ee228fea775a741",
-                    "nhanVienId": "6a1c406192cc8d5a1134aa2b",
                     "tongTien": 45000000,
                     "trangThaiDonHang": "Chờ xử lý",
                     "_id": "6a1daf6a60b1f8575872b546",
@@ -2216,4 +2200,4 @@
       }
     }
   }
-}\n
+}

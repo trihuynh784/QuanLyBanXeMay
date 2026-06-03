@@ -17,14 +17,10 @@ const DonHang_1 = __importDefault(require("../models/DonHang"));
 const ChiTietDonHang_1 = __importDefault(require("../models/ChiTietDonHang"));
 const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const orders = yield DonHang_1.default.find()
+        const orders = yield DonHang_1.default.find({ khachHangId: req.user._id })
             .populate({
             path: "khachHangId",
             select: "hoTen cccd email soDienThoai diaChi",
-        })
-            .populate({
-            path: "nhanVienId",
-            select: "hoTen soDienThoai email",
         })
             .lean();
         const orderIds = orders.map((order) => order._id);
@@ -53,7 +49,6 @@ const getAllOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 tongTien: order.tongTien,
                 trangThaiDonHang: order.trangThaiDonHang,
                 khachHang: order.khachHangId,
-                nhanVien: order.nhanVienId,
                 chiTiet: detail ? {
                     _id: detail._id,
                     donHangId: detail.donHangId,
@@ -92,14 +87,10 @@ exports.getAllOrders = getAllOrders;
 const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const order = yield DonHang_1.default.findById(id)
+        const order = yield DonHang_1.default.findOne({ _id: id, khachHangId: req.user._id })
             .populate({
             path: "khachHangId",
             select: "hoTen cccd email soDienThoai diaChi",
-        })
-            .populate({
-            path: "nhanVienId",
-            select: "hoTen soDienThoai email",
         });
         if (!order) {
             return res.status(404).json({ message: "Order not found" });
@@ -127,7 +118,6 @@ const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 tongTien: order.tongTien,
                 trangThaiDonHang: order.trangThaiDonHang,
                 khachHang: order.khachHangId,
-                nhanVien: order.nhanVienId,
                 chiTiet: details.map((detail) => ({
                     _id: detail._id,
                     donHangId: detail.donHangId,
@@ -161,10 +151,9 @@ const getOrderById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.getOrderById = getOrderById;
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { khachHangId, trangThaiDonHang, chiTiet } = req.body;
-        const nhanVienId = req.user._id;
-        if (!khachHangId ||
-            !trangThaiDonHang ||
+        const { trangThaiDonHang, chiTiet } = req.body;
+        const khachHangId = req.user._id;
+        if (!trangThaiDonHang ||
             !chiTiet ||
             !chiTiet.xeId ||
             !chiTiet.giaBan) {
@@ -175,7 +164,6 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const tongTien = Number(chiTiet.giaBan);
         const newOrder = new DonHang_1.default({
             khachHangId,
-            nhanVienId,
             tongTien,
             trangThaiDonHang,
         });
@@ -191,7 +179,6 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             data: {
                 _id: savedOrder._id,
                 khachHangId: savedOrder.khachHangId,
-                nhanVienId: savedOrder.nhanVienId,
                 tongTien: savedOrder.tongTien,
                 trangThaiDonHang: savedOrder.trangThaiDonHang,
                 ngayDat: savedOrder.ngayDat,

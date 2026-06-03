@@ -4,14 +4,10 @@ import ChiTietDonHang from "../models/ChiTietDonHang";
 
 export const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const orders = await DonHang.find()
+    const orders = await DonHang.find({ khachHangId: (req as any).user._id })
       .populate({
         path: "khachHangId",
         select: "hoTen cccd email soDienThoai diaChi",
-      })
-      .populate({
-        path: "nhanVienId",
-        select: "hoTen soDienThoai email",
       })
       .lean();
 
@@ -46,7 +42,6 @@ export const getAllOrders = async (req: Request, res: Response) => {
         tongTien: order.tongTien,
         trangThaiDonHang: order.trangThaiDonHang,
         khachHang: order.khachHangId,
-        nhanVien: order.nhanVienId,
         chiTiet: detail ? {
           _id: detail._id,
           donHangId: detail.donHangId,
@@ -85,14 +80,10 @@ export const getAllOrders = async (req: Request, res: Response) => {
 export const getOrderById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const order = await DonHang.findById(id)
+    const order = await DonHang.findOne({ _id: id, khachHangId: (req as any).user._id })
       .populate({
         path: "khachHangId",
         select: "hoTen cccd email soDienThoai diaChi",
-      })
-      .populate({
-        path: "nhanVienId",
-        select: "hoTen soDienThoai email",
       });
 
     if (!order) {
@@ -123,7 +114,6 @@ export const getOrderById = async (req: Request, res: Response) => {
         tongTien: order.tongTien,
         trangThaiDonHang: order.trangThaiDonHang,
         khachHang: order.khachHangId,
-        nhanVien: order.nhanVienId,
         chiTiet: details.map((detail: any) => ({
           _id: detail._id,
           donHangId: detail.donHangId,
@@ -156,11 +146,10 @@ export const getOrderById = async (req: Request, res: Response) => {
 
 export const createOrder = async (req: Request, res: Response) => {
   try {
-    const { khachHangId, trangThaiDonHang, chiTiet } = req.body;
-    const nhanVienId = (req as any).user._id;
+    const { trangThaiDonHang, chiTiet } = req.body;
+    const khachHangId = (req as any).user._id;
 
     if (
-      !khachHangId ||
       !trangThaiDonHang ||
       !chiTiet ||
       !chiTiet.xeId ||
@@ -175,7 +164,6 @@ export const createOrder = async (req: Request, res: Response) => {
 
     const newOrder = new DonHang({
       khachHangId,
-      nhanVienId,
       tongTien,
       trangThaiDonHang,
     });
@@ -195,7 +183,6 @@ export const createOrder = async (req: Request, res: Response) => {
       data: {
         _id: savedOrder._id,
         khachHangId: savedOrder.khachHangId,
-        nhanVienId: savedOrder.nhanVienId,
         tongTien: savedOrder.tongTien,
         trangThaiDonHang: savedOrder.trangThaiDonHang,
         ngayDat: savedOrder.ngayDat,

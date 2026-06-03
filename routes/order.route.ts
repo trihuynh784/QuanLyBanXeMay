@@ -4,12 +4,12 @@ import {
   getOrderById,
   createOrder,
 } from "../controllers/order.controller";
-import { authMiddlewareAdmin } from "../middleware/auth.middleware";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router: Router = express.Router();
 
-router.get("/", authMiddlewareAdmin, getAllOrders);
-router.get("/:id", authMiddlewareAdmin, getOrderById);
-router.post("/add", authMiddlewareAdmin, createOrder);
+router.get("/", authMiddleware, getAllOrders);
+router.get("/:id", authMiddleware, getOrderById);
+router.post("/add", authMiddleware, createOrder);
 
 export default router;

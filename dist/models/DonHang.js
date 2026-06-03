@@ -10,11 +10,6 @@ const DonHangSchema = new mongoose_1.default.Schema({
         ref: "KhachHang",
         required: true,
     },
-    nhanVienId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "NhanVien",
-        required: true,
-    },
     ngayDat: {
         type: Date,
         default: Date.now,

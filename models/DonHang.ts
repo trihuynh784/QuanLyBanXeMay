@@ -7,11 +7,6 @@ const DonHangSchema = new mongoose.Schema(
       ref: "KhachHang",
       required: true,
     },
-    nhanVienId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "NhanVien",
-      required: true,
-    },
     ngayDat: {
       type: Date,
       default: Date.now,
