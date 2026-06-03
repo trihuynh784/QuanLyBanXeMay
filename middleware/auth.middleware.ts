@@ -7,7 +7,7 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const token = req.headers?.authorization?.split(" ")[1] || req.cookies?.token;
+  const token = req.cookies?.token;
 
   if (!token) {
     return res.status(401).json({ message: "Token missing" });
@@ -28,7 +28,7 @@ export const authMiddlewareAdmin = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const token = req.headers?.authorization?.split(" ")[1] || req.cookies?.token;
+  const token = req.cookies?.adminToken;
 
   if (!token) {
     return res.status(401).json({ message: "Token missing" });

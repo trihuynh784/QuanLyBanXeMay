@@ -38,7 +38,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!user.trangThai) {
             return res.status(403).json({ message: "Account is inactive" });
         }
-        res.cookie("token", user.token, {
+        res.cookie("adminToken", user.token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "none",
