@@ -7,6 +7,7 @@ import authRoute from "./auth.route";
 import uploadRoute from "./upload.route";
 import customerRoute from "./customer.route";
 import orderRoute from "./order.route";
+import roleRoute from "./role.route";
 
 const baseURL = "/api";
 
@@ -24,6 +25,8 @@ const clientRoute = (app: Express) => {
   app.use(baseURL + "/customers", customerRoute);
 
   app.use(baseURL + "/orders", orderRoute);
+
+  app.use(baseURL + "/roles", roleRoute);
 };
 
 export default clientRoute;

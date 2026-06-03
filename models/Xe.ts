@@ -7,6 +7,10 @@ const XeSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    tenXe: {
+      type: String,
+      required: true,
+    },
     soMay: {
       type: String,
       required: true,

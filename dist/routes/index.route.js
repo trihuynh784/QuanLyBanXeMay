@@ -10,6 +10,7 @@ const auth_route_1 = __importDefault(require("./auth.route"));
 const upload_route_1 = __importDefault(require("./upload.route"));
 const customer_route_1 = __importDefault(require("./customer.route"));
 const order_route_1 = __importDefault(require("./order.route"));
+const role_route_1 = __importDefault(require("./role.route"));
 const baseURL = "/api";
 const clientRoute = (app) => {
     app.use(baseURL + "/vehicles", vehicle_route_1.default);
@@ -19,5 +20,6 @@ const clientRoute = (app) => {
     app.use(baseURL + "/auth", auth_route_1.default);
     app.use(baseURL + "/customers", customer_route_1.default);
     app.use(baseURL + "/orders", order_route_1.default);
+    app.use(baseURL + "/roles", role_route_1.default);
 };
 exports.default = clientRoute;

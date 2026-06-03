@@ -10,6 +10,10 @@ const XeSchema = new mongoose_1.default.Schema({
         required: true,
         unique: true,
     },
+    tenXe: {
+        type: String,
+        required: true,
+    },
     soMay: {
         type: String,
         required: true,

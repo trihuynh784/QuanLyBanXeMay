@@ -28,6 +28,7 @@ const index = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             message: "Get all vehicles successfully",
             data: vehicles.map((v) => ({
                 _id: v._id,
+                tenXe: v.tenXe,
                 soKhung: v.soKhung,
                 soMay: v.soMay,
                 hinhAnh: v.hinhAnh,
@@ -76,6 +77,7 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             message: "Get vehicle detail successfully",
             data: {
                 _id: v._id,
+                tenXe: v.tenXe,
                 soKhung: v.soKhung,
                 soMay: v.soMay,
                 hinhAnh: v.hinhAnh,
@@ -105,8 +107,8 @@ const vehicleDetail = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.vehicleDetail = vehicleDetail;
 const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
-        if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
+        const { tenXe, soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
+        if (!tenXe || !soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
             return res.status(400).json({ message: "Missing required fields" });
         }
         const existingVehicle = yield Xe_1.default.findOne({
@@ -119,6 +121,7 @@ const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 .json({ message: "soKhung or soMay already exists" });
         }
         const newVehicle = new Xe_1.default({
+            tenXe,
             soKhung,
             soMay,
             dongXeId,
@@ -133,6 +136,7 @@ const addVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             message: "Add vehicle successfully",
             data: {
                 _id: newVehicle._id,
+                tenXe: newVehicle.tenXe,
                 soKhung: newVehicle.soKhung,
                 soMay: newVehicle.soMay,
                 hinhAnh: newVehicle.hinhAnh,
@@ -152,11 +156,11 @@ exports.addVehicle = addVehicle;
 const updateVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
-        if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+        const { tenXe, soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh, } = req.body;
+        if (!tenXe || !soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
             return res.status(400).json({ message: "Missing required fields" });
         }
-        const vehicle = yield Xe_1.default.findByIdAndUpdate(id, { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh }, { returnDocument: "after" });
+        const vehicle = yield Xe_1.default.findByIdAndUpdate(id, { tenXe, soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh }, { returnDocument: "after" });
         if (!vehicle) {
             return res.status(404).json({ message: "Vehicle not found" });
         }
@@ -164,6 +168,7 @@ const updateVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             message: "Update vehicle successfully",
             data: {
                 _id: vehicle._id,
+                tenXe: vehicle.tenXe,
                 soKhung: vehicle.soKhung,
                 soMay: vehicle.soMay,
                 hinhAnh: vehicle.hinhAnh,
@@ -191,6 +196,7 @@ const deleteVehicle = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             message: "Delete vehicle successfully",
             data: {
                 _id: vehicle._id,
+                tenXe: vehicle.tenXe,
                 soKhung: vehicle.soKhung,
                 soMay: vehicle.soMay,
                 hinhAnh: vehicle.hinhAnh,

@@ -17,6 +17,7 @@ export const index = async (req: Request, res: Response) => {
       message: "Get all vehicles successfully",
       data: vehicles.map((v: any) => ({
         _id: v._id,
+        tenXe: v.tenXe,
         soKhung: v.soKhung,
         soMay: v.soMay,
         hinhAnh: v.hinhAnh,
@@ -67,6 +68,7 @@ export const vehicleDetail = async (req: Request, res: Response) => {
       message: "Get vehicle detail successfully",
       data: {
         _id: v._id,
+        tenXe: v.tenXe,
         soKhung: v.soKhung,
         soMay: v.soMay,
         hinhAnh: v.hinhAnh,
@@ -96,6 +98,7 @@ export const vehicleDetail = async (req: Request, res: Response) => {
 export const addVehicle = async (req: Request, res: Response) => {
   try {
     const {
+      tenXe,
       soKhung,
       soMay,
       dongXeId,
@@ -105,7 +108,7 @@ export const addVehicle = async (req: Request, res: Response) => {
       hinhAnh,
     } = req.body;
 
-    if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
+    if (!tenXe || !soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat || !hinhAnh) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -121,6 +124,7 @@ export const addVehicle = async (req: Request, res: Response) => {
     }
 
     const newVehicle = new Xe({
+      tenXe,
       soKhung,
       soMay,
       dongXeId,
@@ -137,6 +141,7 @@ export const addVehicle = async (req: Request, res: Response) => {
       message: "Add vehicle successfully",
       data: {
         _id: newVehicle._id,
+        tenXe: newVehicle.tenXe,
         soKhung: newVehicle.soKhung,
         soMay: newVehicle.soMay,
         hinhAnh: newVehicle.hinhAnh,
@@ -156,6 +161,7 @@ export const updateVehicle = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const {
+      tenXe,
       soKhung,
       soMay,
       dongXeId,
@@ -165,13 +171,13 @@ export const updateVehicle = async (req: Request, res: Response) => {
       hinhAnh,
     } = req.body;
 
-    if (!soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
+    if (!tenXe || !soKhung || !soMay || !dongXeId || !mauSac || !namSanXuat) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     const vehicle = await Xe.findByIdAndUpdate(
       id,
-      { soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh },
+      { tenXe, soKhung, soMay, dongXeId, mauSac, namSanXuat, trangThaiXe, hinhAnh },
       { returnDocument: "after" },
     );
 
@@ -183,6 +189,7 @@ export const updateVehicle = async (req: Request, res: Response) => {
       message: "Update vehicle successfully",
       data: {
         _id: vehicle._id,
+        tenXe: vehicle.tenXe,
         soKhung: vehicle.soKhung,
         soMay: vehicle.soMay,
         hinhAnh: vehicle.hinhAnh,
@@ -216,6 +223,7 @@ export const deleteVehicle = async (req: Request, res: Response) => {
       message: "Delete vehicle successfully",
       data: {
         _id: vehicle._id,
+        tenXe: vehicle.tenXe,
         soKhung: vehicle.soKhung,
         soMay: vehicle.soMay,
         hinhAnh: vehicle.hinhAnh,
